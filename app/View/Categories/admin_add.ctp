@@ -1,17 +1,17 @@
 <div class="row-fluid">
 	<div class="span9">
-		<?php echo $this->BootstrapForm->create('Category', array('class' => 'form-horizontal'));?>
+		<?php echo $this->Form->create('Category', array('class' => 'form-horizontal'));?>
 			<fieldset>
 				<legend><?php echo __('Admin Add %s', __('Category')); ?></legend>
 				<?php
-				echo $this->BootstrapForm->input('category', array(
+				echo $this->Form->input('category', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				?>
-				<?php echo $this->BootstrapForm->submit(__('Submit'));?>
+				<?php echo $this->Form->submit(__('Submit'));?>
 			</fieldset>
-		<?php echo $this->BootstrapForm->end();?>
+		<?php echo $this->Form->end();?>
 	</div>
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">

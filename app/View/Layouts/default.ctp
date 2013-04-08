@@ -49,7 +49,7 @@
 					<span class="icon-bar"></span>
 				</a>
                                 
-				<a class="brand" href="#"><?php echo __('CakePHP'); ?></a>
+				<a class="brand" href="#"><?php echo __('myBook'); ?></a>
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>

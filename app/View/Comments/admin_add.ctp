@@ -1,25 +1,25 @@
 <div class="row-fluid">
 	<div class="span9">
-		<?php echo $this->BootstrapForm->create('Comment', array('class' => 'form-horizontal'));?>
+		<?php echo $this->Form->create('Comment', array('class' => 'form-horizontal'));?>
 			<fieldset>
 				<legend><?php echo __('Admin Add %s', __('Comment')); ?></legend>
 				<?php
-				echo $this->BootstrapForm->input('user_id', array(
+				echo $this->Form->input('user_id', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('writing_id', array(
+				echo $this->Form->input('writing_id', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->BootstrapForm->input('content', array(
+				echo $this->Form->input('content', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				?>
-				<?php echo $this->BootstrapForm->submit(__('Submit'));?>
+				<?php echo $this->Form->submit(__('Submit'));?>
 			</fieldset>
-		<?php echo $this->BootstrapForm->end();?>
+		<?php echo $this->Form->end();?>
 	</div>
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">

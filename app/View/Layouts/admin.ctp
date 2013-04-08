@@ -49,7 +49,7 @@
 					<span class="icon-bar"></span>
 				</a>
                                 
-				<a class="brand" href="#">ADMIN</a>
+				<a class="brand" href="#">myBook</a>
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li class="active"><a href="/">Home</a></li>

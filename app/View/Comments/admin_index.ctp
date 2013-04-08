@@ -3,17 +3,17 @@
 		<h2><?php echo __('List %s', __('Comments'));?></h2>
 
 		<p>
-			<?php echo $this->BootstrapPaginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
+			<?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));?>
 		</p>
 
 		<table class="table">
 			<tr>
-				<th><?php echo $this->BootstrapPaginator->sort('id');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('user_id');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('writing_id');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('content');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('created');?></th>
-				<th><?php echo $this->BootstrapPaginator->sort('modified');?></th>
+				<th><?php echo $this->Paginator->sort('id');?></th>
+				<th><?php echo $this->Paginator->sort('user_id');?></th>
+				<th><?php echo $this->Paginator->sort('writing_id');?></th>
+				<th><?php echo $this->Paginator->sort('content');?></th>
+				<th><?php echo $this->Paginator->sort('created');?></th>
+				<th><?php echo $this->Paginator->sort('modified');?></th>
 				<th class="actions"><?php echo __('Actions');?></th>
 			</tr>
 		<?php foreach ($comments as $comment): ?>
@@ -37,7 +37,7 @@
 		<?php endforeach; ?>
 		</table>
 
-		<?php echo $this->BootstrapPaginator->pagination(); ?>
+		<?php echo $this->Paginator->pagination(); ?>
 	</div>
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">

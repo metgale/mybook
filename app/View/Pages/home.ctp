@@ -31,7 +31,7 @@
 				<button type="submit" class="btn">Submit</button>
 			</form>
 
-			<h3>BootstrapFormHelper</h3>
+			<h3>FormHelper</h3>
 			<?php echo $this->Form->create('Test', array('class' => 'well')); ?>
 				<?php echo $this->Form->input(uniqid(), array(
 					'label' => 'Label name',
@@ -70,7 +70,7 @@
 				<button type="submit" class="btn">Search</button>
 			</form>
 
-			<h3>BootstrapFormHelper</h3>
+			<h3>FormHelper</h3>
 			<?php echo $this->Form->create('Test', array('class' => 'well form-search')); ?>
 				<?php echo $this->Form->input(uniqid(), array(
 					'type' => 'text',
@@ -99,7 +99,7 @@
 				<button type="submit" class="btn">Sign in</button>
 			</form>
 
-			<h3>BootstrapFormHelper</h3>
+			<h3>FormHelper</h3>
 			<?php echo $this->Form->create('Test', array('class' => 'well form-inline')); ?>
 				<?php echo $this->Form->input(uniqid(), array(
 					'type' => 'text',
@@ -191,7 +191,7 @@
 
 			<?php echo $this->Form->create('Test', array('class' => 'form-horizontal')); ?>
 				<fieldset>
-					<legend>Controls Bootstrap supports <small>BootstrapFormHelper</small></legend>
+					<legend>Controls Bootstrap supports <small>FormHelper</small></legend>
 					<?php echo $this->Form->input(uniqid(), array(
 						'label' => 'Text input',
 						'type' => 'text',
@@ -336,7 +336,7 @@
 
 			<?php echo $this->Form->create('Test', array('class' => 'form-horizontal')); ?>
 				<fieldset>
-					<legend>Form control states <small>BootstrapFormHelper</small></legend>
+					<legend>Form control states <small>FormHelper</small></legend>
 					<?php echo $this->Form->input(uniqid(), array(
 						'label' => 'Focused input',
 						'type' => 'text',
@@ -548,7 +548,7 @@
 
 			<?php echo $this->Form->create('Test', array('class' => 'form-horizontal')); ?>
 				<fieldset>
-					<legend>Extending form controls <small>BootstrapFormHelper</small></legend>
+					<legend>Extending form controls <small>FormHelper</small></legend>
 					<?php echo $this->Form->input(uniqid(), array(
 						'label' => 'Prepended text',
 						'type' => 'text',
