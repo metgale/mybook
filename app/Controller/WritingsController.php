@@ -24,11 +24,11 @@ class WritingsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function view($id) {
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
 		}
-		$options = array('conditions' => array('Writing.' . $this->Writing->primaryKey => $id));
+		$options = array('conditions' => array('Writing.id' => $id));
 		$this->set('writing', $this->Writing->find('first', $options));
 	}
 
@@ -40,6 +40,7 @@ class WritingsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Writing->create();
+                        $this->request->data['Writing']['user_id'] = $this->Auth->user('id');
 			if ($this->Writing->save($this->request->data)) {
 				$this->Session->setFlash(__('The writing has been saved'));
 				$this->redirect(array('action' => 'index'));

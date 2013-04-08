@@ -5,7 +5,7 @@
 				<legend><?php echo __('Admin Edit %s', __('User')); ?></legend>
 				<?php
 				echo $this->BootstrapForm->input('admin', array(
-					'required' => 'required',
+					'required' => false,
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
 				echo $this->BootstrapForm->input('username', array(

@@ -7,6 +7,7 @@ App::uses('AppModel', 'Model');
  */
 class Category extends AppModel {
 
+    public $displayField = 'Category';
 /**
  * Validation rules
  *

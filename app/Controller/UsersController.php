@@ -90,29 +90,8 @@ class UsersController extends AppController {
         } else {
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
             $this->request->data = $this->User->find('first', $options);
+            unset($this->request->data['User']['password']);
         }
-    }
-
-    /**
-     * delete method
-     *
-     * @throws NotFoundException
-     * @throws MethodNotAllowedException
-     * @param string $id
-     * @return void
-     */
-    public function delete($id = null) {
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        $this->request->onlyAllow('post', 'delete');
-        if ($this->User->delete()) {
-            $this->Session->setFlash(__('User deleted'));
-            $this->redirect(array('action' => 'index'));
-        }
-        $this->Session->setFlash(__('User was not deleted'));
-        $this->redirect(array('action' => 'index'));
     }
 
     /**
@@ -178,6 +157,7 @@ class UsersController extends AppController {
         } else {
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
             $this->request->data = $this->User->find('first', $options);
+            unset($this->request->data['User']['password']);
         }
     }
 

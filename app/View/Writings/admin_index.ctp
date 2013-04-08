@@ -29,7 +29,7 @@
 				</td>
 				<td><?php echo h($writing['Writing']['title']); ?>&nbsp;</td>
 				<td><?php echo h($writing['Writing']['description']); ?>&nbsp;</td>
-				<td><?php echo h($writing['Writing']['content']); ?>&nbsp;</td>
+				<td><?php echo  nl2br(h($writing['Writing']['content'])); ?>&nbsp;</td>
 				<td><?php echo h($writing['Writing']['created']); ?>&nbsp;</td>
 				<td><?php echo h($writing['Writing']['modified']); ?>&nbsp;</td>
 				<td class="actions">
