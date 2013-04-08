@@ -50,5 +50,12 @@ class AppController extends Controller {
             'logoutRedirect' => '/'
         )
     );
-
+    
+    public function beforeRender() {
+        parent::beforeRender();
+        if (isset($this->request->params['admin']) && $this->request->params['admin']) {
+            $this->layout = 'admin';
+        }
+      
+    }
 }

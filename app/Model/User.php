@@ -5,7 +5,8 @@ App::uses('AppModel', 'Model');
 /**
  * User Model
  *
- * @property Post $Post
+ * @property Comment $Comment
+ * @property Writing $Writing
  */
 class User extends AppModel {
 
@@ -16,8 +17,8 @@ class User extends AppModel {
      */
     public $validate = array(
         'admin' => array(
-            'numeric' => array(
-                'rule' => array('numeric'),
+            'boolean' => array(
+                'rule' => array('boolean'),
             //'message' => 'Your custom message here',
             //'allowEmpty' => false,
             //'required' => false,
@@ -45,6 +46,16 @@ class User extends AppModel {
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
         ),
+        'email' => array(
+            'email' => array(
+                'rule' => array('email'),
+            //'message' => 'Your custom message here',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+        ),
     );
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -55,8 +66,21 @@ class User extends AppModel {
      * @var array
      */
     public $hasMany = array(
-        'Post' => array(
-            'className' => 'Post',
+        'Comment' => array(
+            'className' => 'Comment',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
+        'Writing' => array(
+            'className' => 'Writing',
             'foreignKey' => 'user_id',
             'dependent' => false,
             'conditions' => '',
