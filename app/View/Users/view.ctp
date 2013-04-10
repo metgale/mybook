@@ -39,6 +39,7 @@
 			</dd>
 		</dl>
 	</div>
+	
 	<div class="span3">
 		<div class="well" style="padding: 8px 0; margin-top:8px;">
 		<ul class="nav nav-list">
@@ -130,7 +131,7 @@
 		<?php endforeach; ?>
 		</table>
 	<?php endif; ?>
-
+		
 	</div>
 	<div class="span3">
 		<ul class="nav nav-list">

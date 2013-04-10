@@ -14,7 +14,27 @@ class WritingsController extends AppController {
  */
 	public function index() {
 		$this->Writing->recursive = 0;
+        $writings = $this->Writing->find('all');
+        $this->set('writings', $writings);
 		$this->set('writings', $this->paginate());
+	}
+	
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function category($id) {
+		$this->Writing->recursive = 0;
+        $writings = $this->Writing->find('all', array(
+			'conditions' => array(
+				'Writing.category_id' => $id
+			),
+			'order' => 'Writing.created DESC',
+			'limit' => 10
+		));
+       $this->set('writings', $this->paginate());
+	   $this->set('category', $this->Writing->Category->findById($id));
 	}
 
 /**

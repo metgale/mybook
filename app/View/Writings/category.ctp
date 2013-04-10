@@ -1,11 +1,12 @@
 <div class="row-fluid">
     <div class="span9">
-        <h2><?php echo __('List %s', __('Writings')); ?></h2>
+        <h2>Category <?php echo $category['Category']['category']; ?></h2>
 
         <p>
             <?php echo $this->Paginator->counter(array('format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'))); ?>
         </p>
-         		
+        
+        
         <div class="row-fluid">
             <?php foreach ($writings as $writing): ?>     
             <div class="span6">
