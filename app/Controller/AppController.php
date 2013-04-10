@@ -55,7 +55,6 @@ class AppController extends Controller {
         parent::beforeRender();
         if (isset($this->request->params['admin']) && $this->request->params['admin']) {
             $this->layout = 'admin';
-        }
-		$this->set('userData', $this->Auth->user());
+		}
     }
 }

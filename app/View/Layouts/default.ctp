@@ -58,15 +58,13 @@
 						</ul>
 
 						<ul class="user-nav">	
-							<?php if(!$userData): ?>
-							<li><a href="/users/login">Prijava</a></li>
-							<li><a href="/users/add">Registracija</a></li>
-							<?php elseif($userData): ?>
-							<?php echo 'Welcome, ', $_SESSION['Auth']['User']['username'] ?>
-							<li><a href="/users/logout">Logout</a></li>
+							<?php if (!AuthComponent::user()): ?>
+								<li><a href="/users/login">Prijava</a></li>
+								<li><a href="/users/add">Registracija</a></li>
+							<?php elseif (AuthComponent::user()): ?>
+								<li>Welcome, <a href="/users/view/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
+								<li><a href="/users/logout">Logout</a></li>
 							<?php endif ?>
-						
-							
 						</ul>
 
 					</div><!--/.nav-collapse -->				
