@@ -11,12 +11,10 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add');
+        $this->Auth->allow('register');
     }
 	
 	
-
-
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -62,7 +60,7 @@ class UsersController extends AppController {
      *
      * @return void
      */
-    public function add() {
+    public function register() {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
@@ -73,6 +71,8 @@ class UsersController extends AppController {
             }
         }
     }
+	
+	
 
     /**
      * edit method
@@ -81,7 +81,7 @@ class UsersController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function profile($id = null) {
         if (!$this->User->exists($id)) {
             throw new NotFoundException(__('Invalid user'));
         }

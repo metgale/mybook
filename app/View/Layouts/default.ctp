@@ -38,7 +38,6 @@
 	</head>
 
 	<body>
-
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
@@ -51,30 +50,34 @@
 					<a class="brand" href="/"><?php echo __('myBook'); ?></a>
 					<div class="nav-collapse">
 						<ul class="nav">
-							<li><a href="/writings/add">Objavi</a></li>
-							<li><a href="/writings/index">Čitaj</a></li>
 							<li><a href="/users/index">Autori</a></li>
-							<li><a href="/help">Pomoć</a></li>
+							<li><a href="/writings/index">Tekstovi</a></li>
+							<li><a href="/writings/add">Objavi tekst</a></li>
+							<li><a href="/help">Grupe</a></li>
 						</ul>
 
-						<ul class="user-nav">	
-							<?php if (!AuthComponent::user()): ?>
-								<li><a href="/users/login">Prijava</a></li>
-								<li><a href="/users/add">Registracija</a></li>
-							<?php elseif (AuthComponent::user()): ?>
-								<li>Welcome, <a href="/users/view/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
-								<li><a href="/users/logout">Logout</a></li>
-							<?php endif ?>
-						</ul>
+						<form class="navbar-search pull-right">
+							<input type="text" class="search-query" placeholder="Pretraži">
+						</form>
 
-					</div><!--/.nav-collapse -->				
+
+					</div><!--/.nav-collapse -->	
+
 				</div>
 			</div>
+			<ul class="user-nav">	
+				<?php if (!AuthComponent::user()): ?>
+					<a href="/users/login">Prijava</a>
+					<a href="/users/add">Registracija</a>
+				<?php elseif (AuthComponent::user()): ?>
+					<li>Welcome, <a href="/users/profile/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
+					<li><a href="/users/logout">Odjava</a></li>
+				<?php endif ?>
+			</ul>
 		</div>
 
-		<div class="container">
 
-			<h1>Bootstrap starter template</h1>
+		<div class="container">
 
 			<?php echo $this->Session->flash(); ?>
 

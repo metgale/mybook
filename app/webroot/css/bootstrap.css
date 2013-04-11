@@ -262,6 +262,15 @@ a:focus {
     min-height: 1px;
     margin-left: 20px;
 }
+
+.line-separator{
+	height:1px;
+	background:#717171;
+	border-right:1px solid #313030;
+}
+
+
+
 .container,
 .navbar-static-top .container,
 .navbar-fixed-top .container,
@@ -3649,18 +3658,24 @@ input[type="submit"].btn.btn-mini {
     box-shadow: 0 -1px 10px rgba(0,0,0,.1);
 }
 .navbar .nav {
+	font-size: 20px;
     position: relative;
     left: 0;
     display: block;
     float: left;
-    margin: 0 10px 0 0;
+    margin: 0 25px 0 50px;
 }
 
 .navbar .user-nav {
+	font-size:12px;
     position: relative;
     float: right;
 	list-style-type: none;
-    margin: 0 5px 0 0;
+    margin-right: 105px;
+	margin-top: 5px;
+}
+.navbar .user-nav > a{
+	margin: 0 10px 0 10px;
 	
 }
 .navbar .nav.pull-right {
