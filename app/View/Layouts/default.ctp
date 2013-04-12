@@ -55,6 +55,16 @@
 							<li><a href="/writings/add">Objavi tekst</a></li>
 							<li><a href="/help">Grupe</a></li>
 						</ul>
+						<ul class="user-nav">	
+							<?php if (!AuthComponent::user()): ?>
+								<a href="/users/login">Prijava</a>
+								<a href="/users/register">Registracija</a>
+							<?php elseif (AuthComponent::user()): ?>
+								Pozdrav,<a href="/users/profile/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a>
+								<a href="/users/logout">Odjava</a>
+							<?php endif ?>
+								<a href="/users/login">Pomoć</a>
+						</ul>
 
 						<form class="navbar-search pull-right">
 							<input type="text" class="search-query" placeholder="Pretraži">
@@ -65,15 +75,7 @@
 
 				</div>
 			</div>
-			<ul class="user-nav">	
-				<?php if (!AuthComponent::user()): ?>
-					<a href="/users/login">Prijava</a>
-					<a href="/users/add">Registracija</a>
-				<?php elseif (AuthComponent::user()): ?>
-					<li>Welcome, <a href="/users/profile/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
-					<li><a href="/users/logout">Odjava</a></li>
-				<?php endif ?>
-			</ul>
+
 		</div>
 
 

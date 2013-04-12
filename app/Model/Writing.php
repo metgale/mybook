@@ -14,6 +14,8 @@ class Writing extends AppModel {
  *
  * @var array
  */
+
+	
 	public $validate = array(
 		'category_id' => array(
 			'numeric' => array(

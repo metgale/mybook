@@ -1,10 +1,10 @@
 <?php
 
-    class HomeController extends AppController{
-        
-        public function index(){
-            
-    }
-        
+class HomeController extends AppController {
+	public function index() {
+		
+	}
+
 }
+
 ?>
