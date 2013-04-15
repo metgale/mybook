@@ -9,7 +9,6 @@ App::uses('AppModel', 'Model');
  * @property Writing $Writing
  */
 class User extends AppModel {
-    
     public $displayField = 'username';
 
     /**
