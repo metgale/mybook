@@ -5,15 +5,11 @@
 				<legend><?php echo __('Registriraj se na myBook!'); ?></legend>
 				<?php
 				
-				echo $this->Form->input('Korisničko ime', array(
+				echo $this->Form->input('username', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);
-				echo $this->Form->input('Lozinka', array(
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
-				echo $this->Form->input('Ponovi lozinku', array(
+				echo $this->Form->input('password', array(
 					'required' => 'required',
 					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 				);

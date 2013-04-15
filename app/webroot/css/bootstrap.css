@@ -296,6 +296,7 @@ a:focus {
     width: 540px;
 }
 .span6 {
+
     width: 460px;
 }
 .span5 {
@@ -307,6 +308,28 @@ a:focus {
 .span3 {
     width: 220px;
 }
+.writing{
+	position:relative;
+	float:left;
+	width:220px;
+	height:230px;
+	border-bottom: 1px solid #CCC;
+	text-align: justify;
+	margin-left:30px;
+}
+
+.writing-link{
+	position: absolute;
+	bottom:0;
+	right:0;
+	font-size: 12px;
+}
+
+.writing-title{
+	height: 40px;
+	width: 220px;
+}
+
 .span2 {
     width: 140px;
 }
@@ -3675,7 +3698,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar .user-nav > a{
 	margin: 0 10px 0 10px;
-	
+
 }
 .navbar .nav.pull-right {
     float: right;

@@ -1,49 +1,48 @@
 <?php
+
 App::uses('AppController', 'Controller');
+
 /**
  * Writings Controller
  *
  * @property Writing $Writing
  */
 class WritingsController extends AppController {
-
-/**
- * index method
- *
- * @return void
- */
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
 	public function index() {
 		$this->Writing->recursive = 0;
-        $writings = $this->Writing->find('all');
-        $this->set('writings', $writings);
+		$writings = $this->Writing->find('all');
+		$this->set('writings', $writings);
+		$this->paginate = array('limit' => 6);
 		$this->set('writings', $this->paginate());
 	}
-	
-/**
- * index method
- *
- * @return void
- */
+
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
 	public function category($id) {
 		$this->Writing->recursive = 0;
-        $writings = $this->Writing->find('all', array(
-			'conditions' => array(
-				'Writing.category_id' => $id
-			),
-			'order' => 'Writing.created DESC',
-			'limit' => 10
-		));
-       $this->set('writings', $this->paginate());
-	   $this->set('category', $this->Writing->Category->findById($id));
+		$this->paginate = array(
+			'conditions' => array('Writing.category_id' => $id),
+			'limit' => 6
+		);
+		$this->set('writings', $this->paginate());
+		$this->set('category', $this->Writing->Category->findById($id));
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function view($id) {
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
@@ -52,15 +51,15 @@ class WritingsController extends AppController {
 		$this->set('writing', $this->Writing->find('first', $options));
 	}
 
-/**
- * add method
- *
- * @return void
- */
+	/**
+	 * add method
+	 *
+	 * @return void
+	 */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Writing->create();
-                        $this->request->data['Writing']['user_id'] = $this->Auth->user('id');
+			$this->request->data['Writing']['user_id'] = $this->Auth->user('id');
 			if ($this->Writing->save($this->request->data)) {
 				$this->Session->setFlash(__('The writing has been saved'));
 				$this->redirect(array('action' => 'index'));
@@ -73,13 +72,13 @@ class WritingsController extends AppController {
 		$this->set(compact('categories', 'users'));
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function edit($id = null) {
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
@@ -100,14 +99,14 @@ class WritingsController extends AppController {
 		$this->set(compact('categories', 'users'));
 	}
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @throws MethodNotAllowedException
- * @param string $id
- * @return void
- */
+	/**
+	 * delete method
+	 *
+	 * @throws NotFoundException
+	 * @throws MethodNotAllowedException
+	 * @param string $id
+	 * @return void
+	 */
 	public function delete($id = null) {
 		$this->Writing->id = $id;
 		if (!$this->Writing->exists()) {
@@ -122,24 +121,23 @@ class WritingsController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 
-
-/**
- * admin_index method
- *
- * @return void
- */
+	/**
+	 * admin_index method
+	 *
+	 * @return void
+	 */
 	public function admin_index() {
 		$this->Writing->recursive = 0;
 		$this->set('writings', $this->paginate());
 	}
 
-/**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * admin_view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function admin_view($id = null) {
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
@@ -148,11 +146,11 @@ class WritingsController extends AppController {
 		$this->set('writing', $this->Writing->find('first', $options));
 	}
 
-/**
- * admin_add method
- *
- * @return void
- */
+	/**
+	 * admin_add method
+	 *
+	 * @return void
+	 */
 	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Writing->create();
@@ -168,13 +166,13 @@ class WritingsController extends AppController {
 		$this->set(compact('categories', 'users'));
 	}
 
-/**
- * admin_edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * admin_edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function admin_edit($id = null) {
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
@@ -195,14 +193,14 @@ class WritingsController extends AppController {
 		$this->set(compact('categories', 'users'));
 	}
 
-/**
- * admin_delete method
- *
- * @throws NotFoundException
- * @throws MethodNotAllowedException
- * @param string $id
- * @return void
- */
+	/**
+	 * admin_delete method
+	 *
+	 * @throws NotFoundException
+	 * @throws MethodNotAllowedException
+	 * @param string $id
+	 * @return void
+	 */
 	public function admin_delete($id = null) {
 		$this->Writing->id = $id;
 		if (!$this->Writing->exists()) {
@@ -216,4 +214,5 @@ class WritingsController extends AppController {
 		$this->Session->setFlash(__('Writing was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

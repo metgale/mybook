@@ -50,10 +50,10 @@
 					<a class="brand" href="/"><?php echo __('myBook'); ?></a>
 					<div class="nav-collapse">
 						<ul class="nav">
-							<li><a href="/users/index">Autori</a></li>
-							<li><a href="/writings/index">Tekstovi</a></li>
-							<li><a href="/writings/add">Objavi tekst</a></li>
-							<li><a href="/help">Grupe</a></li>
+							<li><a href="/users/index">autori</a></li>
+							<li><a href="/writings/index">tekstovi</a></li>
+							<li><a href="/writings/add">objavi tekst</a></li>
+							<li><a href="/help">grupe</a></li>
 						</ul>
 						<ul class="user-nav">	
 							<?php if (!AuthComponent::user()): ?>

@@ -35,40 +35,46 @@
 		</dl>
 	</div>
 
-<div class="row-fluid">
-	<div class="span9">
-		<h3><?php echo __('Related %s', __('Comments')); ?></h3>
-		<?php if (!empty($writing['Comment'])): ?>
-			<table class="table">
-				<tr>
-					<th><?php echo __('User Id'); ?></th>
-					<th><?php echo __('Writing Id'); ?></th>
-					<th><?php echo __('Content'); ?></th>
-					<th><?php echo __('Created'); ?></th>
-					<th><?php echo __('Modified'); ?></th>
-					<th class="actions"><?php echo __('Actions'); ?></th>
-				</tr>
-				<?php foreach ($writing['Comment'] as $comment): ?>
+	<?php echo $this->Form->create('Comment', array('class' => 'form-horizontal')); ?>
+	<fieldset>
+		<legend><?php echo __('Add %s', __('Comment')); ?></legend>
+		<?php
+		echo $this->Form->input('content', array(
+			'required' => 'required',
+			'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+		);
+		?>
+		<?php echo $this->Form->submit(__('Submit')); ?>
+	</fieldset>
+
+	<div class="row-fluid">
+		<div class="span9">
+
+			<?php if (!empty($writing['Comment'])): ?>
+				<table class="table">
 					<tr>
-						<td><?php echo $comment['user_id']; ?></td>
-						<td><?php echo $comment['writing_id']; ?></td>
-						<td><?php echo $comment['content']; ?></td>
-						<td><?php echo $comment['created']; ?></td>
-						<td><?php echo $comment['modified']; ?></td>
-						<td class="actions">
-							<?php echo $this->Html->link(__('View'), array('controller' => 'comments', 'action' => 'view', $comment['id'])); ?>
-							<?php echo $this->Html->link(__('Edit'), array('controller' => 'comments', 'action' => 'edit', $comment['id'])); ?>
-							<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'comments', 'action' => 'delete', $comment['id']), null, __('Are you sure you want to delete # %s?', $comment['id'])); ?>
-						</td>
+						<th><?php echo __('User Id'); ?></th>
+						<th><?php echo __('Writing Id'); ?></th>
+						<th><?php echo __('Content'); ?></th>
+						<th><?php echo __('Created'); ?></th>
+						<th><?php echo __('Modified'); ?></th>
+
 					</tr>
-				<?php endforeach; ?>
-			</table>
-		<?php endif; ?>
+					<?php foreach ($writing['Comment'] as $comment): ?>
+						<tr>
+							<td><?php echo $comment['user_id']; ?></td>
+							<td><?php echo $comment['writing_id']; ?></td>
+							<td><?php echo $comment['content']; ?></td>
+							<td><?php echo $comment['created']; ?></td>
+							<td><?php echo $comment['modified']; ?></td>
+
+						</tr>
+					<?php endforeach; ?>
+				</table>
+			<?php endif; ?>
+
+
+
+		</div>
 
 	</div>
-	<div class="span3">
-		<ul class="nav nav-list">
-			<li><?php echo $this->Html->link(__('New %s', __('Comment')), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>

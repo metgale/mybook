@@ -28,5 +28,5 @@
 		<?php echo $this->Paginator->pagination(); ?>
 	</div>
 	
-	</div>
 </div>
+</div
