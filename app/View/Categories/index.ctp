@@ -4,7 +4,7 @@
 
 		<?php debug($categories); ?>
 		<?php foreach ($categories as $category): ?>
-		<?php echo $this->Html->link($category['Category']['category'], array('action' => 'view', $category['Category']['id'])); ?> 
+		<?php echo $this->Html->link($category['Category']['name'], array('action' => 'view', $category['Category']['id'])); ?> 
 		<?php endforeach; ?>
 		</table>
 

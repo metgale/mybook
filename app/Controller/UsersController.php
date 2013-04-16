@@ -55,7 +55,9 @@ class UsersController extends AppController {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+		$options = array(
+			'conditions' => array('User.' . $this->User->primaryKey => $id),
+			'contain' => array('Writing', 'Comment'));
 		$this->set('user', $this->User->find('first', $options));
 	}
 
@@ -107,7 +109,6 @@ class UsersController extends AppController {
 	 * @return void
 	 */
 	public function admin_index() {
-		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}
 
@@ -122,9 +123,13 @@ class UsersController extends AppController {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+		$options = array(
+			'conditions' => array('User.' . $this->User->primaryKey => $id),
+			'contain' => array('Writing', 'Comment')
+		);
 		$this->set('user', $this->User->find('first', $options));
-	}
+		}
+
 
 	/**
 	 * admin_add method
@@ -191,3 +196,5 @@ class UsersController extends AppController {
 	}
 
 }
+
+

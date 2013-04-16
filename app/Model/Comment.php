@@ -10,6 +10,7 @@ App::uses('AppModel', 'Model');
  */
 class Comment extends AppModel {
 
+	public $displayField = 'title';
 
 	/**
 	 * Validation rules

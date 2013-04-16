@@ -9,24 +9,12 @@
 			</dd>
 			<dt><?php echo __('Category'); ?></dt>
 			<dd>
-				<?php echo h($category['Category']['category']); ?>
+				<?php echo h($category['Category']['name']); ?>
 				&nbsp;
 			</dd>
 		</dl>
 	</div>
-	<div class="span3">
-		<div class="well" style="padding: 8px 0; margin-top:8px;">
-		<ul class="nav nav-list">
-			<li class="nav-header"><?php echo __('Actions'); ?></li>
-			<li><?php echo $this->Html->link(__('Edit %s', __('Category')), array('action' => 'edit', $category['Category']['id'])); ?> </li>
-			<li><?php echo $this->Form->postLink(__('Delete %s', __('Category')), array('action' => 'delete', $category['Category']['id']), null, __('Are you sure you want to delete # %s?', $category['Category']['id'])); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Categories')), array('action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Category')), array('action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List %s', __('Writings')), array('controller' => 'writings', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('New %s', __('Writing')), array('controller' => 'writings', 'action' => 'add')); ?> </li>
-		</ul>
-		</div>
-	</div>
+
 </div>
 
 <div class="row-fluid">
@@ -55,20 +43,12 @@
 				<td><?php echo $writing['content'];?></td>
 				<td><?php echo $writing['created'];?></td>
 				<td><?php echo $writing['modified'];?></td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('controller' => 'writings', 'action' => 'view', $writing['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('controller' => 'writings', 'action' => 'edit', $writing['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'writings', 'action' => 'delete', $writing['id']), null, __('Are you sure you want to delete # %s?', $writing['id'])); ?>
-				</td>
+				
 			</tr>
 		<?php endforeach; ?>
 		</table>
 	<?php endif; ?>
 
 	</div>
-	<div class="span3">
-		<ul class="nav nav-list">
-			<li><?php echo $this->Html->link(__('New %s', __('Writing')), array('controller' => 'writings', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
+	
 </div>

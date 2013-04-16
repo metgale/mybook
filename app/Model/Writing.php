@@ -16,6 +16,8 @@ class Writing extends AppModel {
 	 *
 	 * @var array
 	 */
+	
+	public $displayField = 'title';
 
 	public $validate = array(
 		'category_id' => array(

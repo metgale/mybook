@@ -14,7 +14,6 @@ class WritingsController extends AppController {
 	 * @return void
 	 */
 	public function index() {
-
 		$this->paginate = array(
 			'limit' => 6
 		);
@@ -129,10 +128,14 @@ class WritingsController extends AppController {
 	 * @return void
 	 */
 	public function admin_index() {
-		$this->Writing->recursive = 0;
+		$this->paginate = array(
+			'limit' => 6,
+			'contain' => array('Category', 'User'));
 		$this->set('writings', $this->paginate());
 	}
 
+	
+	
 	/**
 	 * admin_view method
 	 *
@@ -144,7 +147,9 @@ class WritingsController extends AppController {
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
 		}
-		$options = array('conditions' => array('Writing.' . $this->Writing->primaryKey => $id));
+		$options = array(
+			'conditions' => array('Writing.' . $this->Writing->primaryKey => $id),
+			'contain' => array('Category', 'User', 'Comment'));
 		$this->set('writing', $this->Writing->find('first', $options));
 	}
 

@@ -9,7 +9,7 @@
 			</dd>
 			<dt><?php echo __('Category'); ?></dt>
 			<dd>
-				<?php echo h($category['Category']['category']); ?>
+				<?php echo h($category['Category']['name']); ?>
 				&nbsp;
 			</dd>
 		</dl>

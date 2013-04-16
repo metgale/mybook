@@ -9,7 +9,7 @@ App::uses('AppModel', 'Model');
  */
 class Category extends AppModel {
 
-	public $displayField = 'Category';
+	public $displayField = 'name';
 
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
