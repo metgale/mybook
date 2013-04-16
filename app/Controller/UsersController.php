@@ -13,9 +13,6 @@ class UsersController extends AppController {
 		$this->Auth->allow('register');
 	}
 
-
-
-
 	public function login() {
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
@@ -35,9 +32,16 @@ class UsersController extends AppController {
 	 *
 	 * @return void
 	 */
+	//CONTAIN
 	public function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
+		$this->paginate = array(
+			'User' => array(
+				'order' => array('User.created' => 'desc'),
+				'contain' => array('Comment')
+			)
+		);
+		$users = $this->paginate();
+		$this->set(compact('users'));
 	}
 
 	/**

@@ -1,6 +1,8 @@
 <div class="row-fluid">
     <div class="span9">
         <div class="row-fluid">
+			
+			<?php debug($writings); ?>
 			<?php foreach ($writings as $writing): ?>     
 
 				<div class="writing">
