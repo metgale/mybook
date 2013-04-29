@@ -1,6 +1,25 @@
 <div class="row-fluid">
     <div class="span9">
+		
         <div class="row-fluid">
+
+			<div class="nav-left">
+				<div class="dropdown">
+					<a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+						Kategorije
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<?php foreach ($categories as $category): ?>  
+						<p><?php echo $this->Html->link(h($category['Category']['name']), array(
+								'controller' => 'Categories',
+								'action' => 'view', $category['Category']['id'])); ?>	</p>
+						
+						<?php endforeach; ?>
+
+					</ul>
+				</div>			
+			</div>
 
 
 			<?php foreach ($writings as $writing): ?>     
