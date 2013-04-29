@@ -1,0 +1,26 @@
+body{
+	padding-top: 30px;
+}
+
+.writing{
+	position:relative;
+	float:left;
+	width:220px;
+	height:230px;
+	border-bottom: 1px solid #CCC;
+	text-align: justify;
+	margin-left:30px;
+}
+
+.writing-link{
+	position: absolute;
+	bottom:0;
+	right:0;
+	font-size: 12px;
+}
+
+.writing-title{
+	height: 40px;
+	width: 220px;
+}
+
