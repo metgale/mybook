@@ -1,55 +1,66 @@
 <?php
+
 App::uses('AppController', 'Controller');
+
 /**
  * Categories Controller
  *
  * @property Category $Category
  */
 class CategoriesController extends AppController {
-
-/**
- * index method
- *
- * @return void
- */
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
 	public function index() {
 		$this->set('categories', $this->paginate());
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function view($id) {
 		if (!$this->Category->exists($id)) {
 			throw new NotFoundException(__('Invalid category'));
 		}
-		$options = array(
+		$categoryOptions = array(
 			'conditions' => array('Category.id' => $id),
 			'contain' => array('Writing')
-			);
-		$this->set('category', $this->Category->find('first', $options));
+		);
+		$this->set('category', $this->Category->find('first', $categoryOptions));
+		$this->paginate = array(
+			'Writing' => array(
+				'conditions' => array(
+					'Writing.category_id' => $id),
+					'order' => 'Writing.created DESC',
+					'contain' => array('User'),
+					'limit' => 6
+		));
+		$writings = $this->paginate('Writing');
+		$this->set('writings', $writings);
 	}
 
-/**
- * admin_index method
- *
- * @return void
- */
+	/**
+	 * admin_index method
+	 *
+	 * @return void
+	 */
 	public function admin_index() {
 		$this->set('categories', $this->paginate());
 	}
 
-/**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * admin_view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function admin_view($id = null) {
 		if (!$this->Category->exists($id)) {
 			throw new NotFoundException(__('Invalid category'));
@@ -57,15 +68,15 @@ class CategoriesController extends AppController {
 		$options = array(
 			'conditions' => array('Category.' . $this->Category->primaryKey => $id),
 			'contain' => array('Writing')
-			);
+		);
 		$this->set('category', $this->Category->find('first', $options));
 	}
 
-/**
- * admin_add method
- *
- * @return void
- */
+	/**
+	 * admin_add method
+	 *
+	 * @return void
+	 */
 	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Category->create();
@@ -78,13 +89,13 @@ class CategoriesController extends AppController {
 		}
 	}
 
-/**
- * admin_edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+	/**
+	 * admin_edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
 	public function admin_edit($id = null) {
 		if (!$this->Category->exists($id)) {
 			throw new NotFoundException(__('Invalid category'));
@@ -102,14 +113,14 @@ class CategoriesController extends AppController {
 		}
 	}
 
-/**
- * admin_delete method
- *
- * @throws NotFoundException
- * @throws MethodNotAllowedException
- * @param string $id
- * @return void
- */
+	/**
+	 * admin_delete method
+	 *
+	 * @throws NotFoundException
+	 * @throws MethodNotAllowedException
+	 * @param string $id
+	 * @return void
+	 */
 	public function admin_delete($id = null) {
 		$this->Category->id = $id;
 		if (!$this->Category->exists()) {
@@ -123,4 +134,5 @@ class CategoriesController extends AppController {
 		$this->Session->setFlash(__('Category was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }
