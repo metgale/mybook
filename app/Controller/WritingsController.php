@@ -47,9 +47,34 @@ class WritingsController extends AppController {
 		}
 		$options = array(
 			'conditions' => array('Writing.id' => $id),
-			'contain' => array('Category', 'User', 'Comment')
+			'contain' => array('Category', 'User')
 		);
-		$this->set('writing', $this->Writing->find('first', $options));
+		$writing = $this->Writing->find('first', $options);
+		$this->set('writing', $writing);
+		$this->paginate = array(
+			'Comment' => array(
+				'conditions' => array(
+					'Comment.writing_id' => $id),
+					'order' => 'Comment.created DESC',
+					'contain' => array('User'),
+					'limit' => 10
+		));
+		$comments = $this->paginate('Comment');
+		$this->set('comments', $comments);
+		
+		if (!$this->request->is('post')) {
+			return false;
+		}
+		if (empty($this->request->data)) {
+			$this->Session->setFlash('Niste unijeli komentar');
+			return false;
+		}
+		$this->request->data['Comment']['user_id'] = $this->Auth->user('id');
+		$this->request->data['Comment']['writing_id'] = $id;
+		if ($this->Writing->Comment->save($this->request->data)){
+			$this->Session->setFlash('ok');
+		$this->redirect(array('controller'=> 'writings', 'action'=>'view', $id, '#' =>'comments' ));			
+		}
 	}
 
 	/**
@@ -99,7 +124,6 @@ class WritingsController extends AppController {
 		$users = $this->Writing->User->find('list');
 		$this->set(compact('categories', 'users'));
 	}
-
 	/**
 	 * delete method
 	 *
@@ -121,7 +145,6 @@ class WritingsController extends AppController {
 		$this->Session->setFlash(__('Writing was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-
 	/**
 	 * admin_index method
 	 *
@@ -133,9 +156,6 @@ class WritingsController extends AppController {
 			'contain' => array('Category', 'User'));
 		$this->set('writings', $this->paginate());
 	}
-
-	
-	
 	/**
 	 * admin_view method
 	 *
