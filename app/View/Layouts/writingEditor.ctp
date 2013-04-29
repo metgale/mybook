@@ -11,9 +11,13 @@
 		<meta name="author" content="">
 
 		<!-- Le styles -->
-		<?php echo $this->Html->css(array('bootstrap', 'mybook')); ?>
+		<?php echo $this->Html->css('bootstrap'); ?>
 
-
+		<?php
+		if (isset($javascript)):
+		echo $javascript->link('tinymce/tiny_mce.min.js');
+		endif;
+		?>
 		<style>
 			body {
 				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -59,12 +63,15 @@
 						</ul>
 						<ul class="user-nav">	
 							<?php if (!AuthComponent::user()): ?>
-								
+								<a href="/users/login">Prijava</a>
+								<a href="/users/register">Registracija</a>
 							<?php elseif (AuthComponent::user()): ?>
 								Pozdrav,<a href="/users/profile/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a>
 								<a href="/users/logout">Odjava</a>
 							<?php endif ?>
+							<a href="/users/login">Pomoć</a>
 						</ul>
+
 						<form class="navbar-search pull-right">
 							<input type="text" class="search-query" placeholder="Pretraži">
 						</form>

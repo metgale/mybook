@@ -1,8 +1,8 @@
 <div class="row-fluid">
     <div class="span9">
         <div class="row-fluid">
-			
-			<?php debug($writings); ?>
+
+
 			<?php foreach ($writings as $writing): ?>     
 
 				<div class="writing">
@@ -16,14 +16,10 @@
 				</div>
 			<?php endforeach; ?>
         </div>
-
-		<?php echo $this->Paginator->pagination(); ?>
-
-		<p>
-			<?php echo $this->Paginator->counter(array(
-				'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}'))); ?>
-        </p>
-
-    </div>
+		<?php
+		echo $this->Paginator->pagination();
+		?>
+	</div>
+</div>
 
 
