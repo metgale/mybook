@@ -37,7 +37,6 @@ class UsersController extends AppController {
 		$this->paginate = array(
 			'User' => array(
 				'order' => array('User.created' => 'desc'),
-				'contain' => array('Comment')
 			)
 		);
 		$users = $this->paginate();
@@ -59,6 +58,28 @@ class UsersController extends AppController {
 			'conditions' => array('User.' . $this->User->primaryKey => $id),
 			'contain' => array('Writing', 'Comment'));
 		$this->set('user', $this->User->find('first', $options));
+		$this->paginate = array(
+			'Writing' => array(
+				'conditions' => array(
+					'Writing.user_id' => $id),
+					'order' => 'Writing.created DESC',
+					'contain' => array('User'),
+					'limit' => 6
+		));
+		$writings = $this->paginate('Writing');
+		$this->set('writings', $writings);
+	}
+
+	public function userComments($id = null) {
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$this->paginate = array(
+			'Comment' => array(
+				'conditions' => array('Comment.user_id' => $id)
+		));
+		$comments = $this->paginate('Comment');
+		$this->set('comments', $comments);
 	}
 
 	/**
@@ -67,6 +88,7 @@ class UsersController extends AppController {
 	 * @return void
 	 */
 	public function register() {
+
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -128,8 +150,7 @@ class UsersController extends AppController {
 			'contain' => array('Writing', 'Comment')
 		);
 		$this->set('user', $this->User->find('first', $options));
-		}
-
+	}
 
 	/**
 	 * admin_add method
@@ -196,5 +217,4 @@ class UsersController extends AppController {
 	}
 
 }
-
 
