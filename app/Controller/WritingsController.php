@@ -15,9 +15,11 @@ class WritingsController extends AppController {
 	 */
 	public function index() {
 		$this->paginate = array(
-			'limit' => 6
+			'limit' => 6,
 		);
 		$this->set('writings', $this->paginate());
+		$categories = $this->Writing->Category->find('all');
+		$this->set('categories', $categories);
 	}
 
 	/**
@@ -55,13 +57,13 @@ class WritingsController extends AppController {
 			'Comment' => array(
 				'conditions' => array(
 					'Comment.writing_id' => $id),
-					'order' => 'Comment.created DESC',
-					'contain' => array('User'),
-					'limit' => 10
+				'order' => 'Comment.created DESC',
+				'contain' => array('User'),
+				'limit' => 10
 		));
 		$comments = $this->paginate('Comment');
 		$this->set('comments', $comments);
-		
+
 		if (!$this->request->is('post')) {
 			return false;
 		}
@@ -71,9 +73,9 @@ class WritingsController extends AppController {
 		}
 		$this->request->data['Comment']['user_id'] = $this->Auth->user('id');
 		$this->request->data['Comment']['writing_id'] = $id;
-		if ($this->Writing->Comment->save($this->request->data)){
+		if ($this->Writing->Comment->save($this->request->data)) {
 			$this->Session->setFlash('ok');
-		$this->redirect(array('controller'=> 'writings', 'action'=>'view', $id, '#' =>'comments' ));			
+			$this->redirect(array('controller' => 'writings', 'action' => 'view', $id, '#' => 'comments'));
 		}
 	}
 
@@ -124,6 +126,7 @@ class WritingsController extends AppController {
 		$users = $this->Writing->User->find('list');
 		$this->set(compact('categories', 'users'));
 	}
+
 	/**
 	 * delete method
 	 *
@@ -145,6 +148,7 @@ class WritingsController extends AppController {
 		$this->Session->setFlash(__('Writing was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
 	/**
 	 * admin_index method
 	 *
@@ -156,6 +160,7 @@ class WritingsController extends AppController {
 			'contain' => array('Category', 'User'));
 		$this->set('writings', $this->paginate());
 	}
+
 	/**
 	 * admin_view method
 	 *
