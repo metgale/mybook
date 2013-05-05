@@ -34,27 +34,28 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-    public $helpers = array(
-        'Session',
-        'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
-        'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
-        'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
-    );
-    public $components = array(
-        'Session',
-        'DebugKit.Toolbar',
-        'Auth' => array(
-            'loginAction' => array('controller' => 'users','action' => 'login'),
-            'authError' => 'Did you really think you are allowed to see that?',
-            'authenticate' => 'Form',
-            'logoutRedirect' => '/'
-        )
-    );
-    
-    public function beforeRender() {
-        parent::beforeRender();
-        if (isset($this->request->params['admin']) && $this->request->params['admin']) {
-            $this->layout = 'admin';
+	public $helpers = array(
+		'Session',
+		'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
+		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+		'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+	);
+	public $components = array(
+		'Session',
+		'DebugKit.Toolbar',
+		'Auth' => array(
+			'loginAction' => array('controller' => 'users', 'action' => 'login'),
+			'authError' => 'Did you really think you are allowed to see that?',
+			'authenticate' => 'Form',
+			'logoutRedirect' => '/'
+		)
+	);
+
+	public function beforeRender() {
+		parent::beforeRender();
+		if (isset($this->request->params['admin']) && $this->request->params['admin']) {
+			$this->layout = 'admin';
 		}
-    }
+	}
+
 }

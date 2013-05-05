@@ -28,21 +28,35 @@
 <?php echo $this->Html->link(__('Pregledaj sve komentare korisnika'), array('action' => 'userComments', $user['User']['id'])); ?>				
 <div class="row-fluid">
 	<div class="span9">
-		<h3><?php echo __('Korisnikova djela'); ?></h3>
+		<h3><?php echo __('Najnoviji tekstovi korisnika'); ?></h3>
+		
+		<?php echo $this->Html->link('Sva korisnikova djela', array(
+								'controller' => 'users',
+								'action' => 'userWritings', $user['User']['id'])); ?>	</li>
+		
+		
 		<?php if (!empty($user['Writing'])): ?>
 			<?php foreach ($writings as $writing): ?>
-				<div class="writing">
-					<div class="writing-title">
+				<div class="box">
+					<div class="box-title">
 						<h4><?php echo h($writing['Writing']['title']); ?></h4>
 					</div>
 					<p><?php echo h($writing['Writing']['description']); ?></p>
-					<div class="writing-link">
-						<?php echo $this->Html->link('Pročitaj', array('action' => 'view', $writing['Writing']['id'])); ?>	
+					<div class="box-link">
+						<?php
+						echo $this->Html->link('Pročitaj', array(
+							'controller' => 'writings',
+							'action' => 'view', $writing['Writing']['id']));
+						?>	
 					</div>
 				</div>
 			<?php endforeach; ?>
 		<?php endif; ?>
+		<?php
+
+		?>
 	</div>
+
 </div>
 
 

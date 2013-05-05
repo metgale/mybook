@@ -21,7 +21,7 @@ class Comment extends AppModel {
 		'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-			//'message' => 'Your custom message here',
+			'message' => 'Your custom message here',
 			//'allowEmpty' => false,
 			//'required' => false,
 			//'last' => false, // Stop validation after this rule
@@ -41,7 +41,7 @@ class Comment extends AppModel {
 		'content' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-			//'message' => 'Your custom message here',
+			'message' => 'Your custom message here',
 			//'allowEmpty' => false,
 			//'required' => false,
 			//'last' => false, // Stop validation after this rule
@@ -59,6 +59,7 @@ class Comment extends AppModel {
 	 */
 	public $belongsTo = array(
 		'User' => array(
+			'counterCache'=>true,
 			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',
@@ -66,6 +67,7 @@ class Comment extends AppModel {
 			'order' => ''
 		),
 		'Writing' => array(
+			'counterCache'=>true,
 			'className' => 'Writing',
 			'foreignKey' => 'writing_id',
 			'conditions' => '',

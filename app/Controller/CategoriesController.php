@@ -38,11 +38,14 @@ class CategoriesController extends AppController {
 				'conditions' => array(
 					'Writing.category_id' => $id),
 					'order' => 'Writing.created DESC',
-					'contain' => array('User'),
+					'contain' => array('User', 'Category'),
 					'limit' => 6
 		));
 		$writings = $this->paginate('Writing');
 		$this->set('writings', $writings);
+		
+		$categories = $this->Category->find('all');
+		$this->set('categories', $categories);
 	}
 
 	/**

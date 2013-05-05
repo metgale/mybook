@@ -16,6 +16,7 @@ class WritingsController extends AppController {
 	public function index() {
 		$this->paginate = array(
 			'limit' => 6,
+			'order' => 'writing.created DESC'
 		);
 		$this->set('writings', $this->paginate());
 		$categories = $this->Writing->Category->find('all');

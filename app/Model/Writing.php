@@ -17,6 +17,8 @@ class Writing extends AppModel {
 	 * @var array
 	 */
 	
+	
+	
 	public $displayField = 'title';
 
 	public $validate = array(
@@ -88,6 +90,7 @@ class Writing extends AppModel {
 			'order' => ''
 		),
 		'User' => array(
+			'counterCache' => true,
 			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',

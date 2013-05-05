@@ -11,10 +11,9 @@
 					</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 						<?php foreach ($categories as $category): ?>  
-						<p><?php echo $this->Html->link(h($category['Category']['name']), array(
+						<li><?php echo $this->Html->link(h($category['Category']['name']), array(
 								'controller' => 'Categories',
-								'action' => 'view', $category['Category']['id'])); ?>	</p>
-						
+								'action' => 'view', $category['Category']['id'])); ?>	</li>
 						<?php endforeach; ?>
 
 					</ul>
@@ -24,13 +23,16 @@
 
 			<?php foreach ($writings as $writing): ?>     
 
-				<div class="writing">
-					<div class="writing-title">
+				<div class="box">
+					<div class="box-title">
 						<h4><?php echo h($writing['Writing']['title']); ?></h4>
 					</div>
 					<p><?php echo h($writing['Writing']['description']); ?></p>
-					<div class="writing-link">
+					<div class="box-link">
 						<?php echo $this->Html->link('Pročitaj', array('action' => 'view', $writing['Writing']['id'])); ?>	
+					</div>
+					<div class="box-date">
+						<?php echo $this->Time->timeAgoInWords($writing['Writing']['created']); ?>
 					</div>
 				</div>
 			<?php endforeach; ?>
