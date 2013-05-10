@@ -1,3 +1,4 @@
+
 <div class="row-fluid">
     <div class="span9">
 		
@@ -21,7 +22,8 @@
 			</div>
 
 
-			<?php foreach ($writings as $writing): ?>     
+			<?php foreach ($writings as $writing): ?>    
+			
 
 				<div class="box">
 					<div class="box-title">
@@ -35,6 +37,7 @@
 						<?php echo $this->Time->timeAgoInWords($writing['Writing']['created']); ?>
 					</div>
 				</div>
+				
 			<?php endforeach; ?>
         </div>
 		<?php
@@ -42,5 +45,4 @@
 		?>
 	</div>
 </div>
-
 
