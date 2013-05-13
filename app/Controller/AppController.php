@@ -48,7 +48,7 @@ class AppController extends Controller {
 			'loginAction' => array('controller' => 'users', 'action' => 'login'),
 			'authError' => 'Did you really think you are allowed to see that?',
 			'authenticate' => 'Form',
-			'logoutRedirect' => '/'
+			'logoutRedirect' => 'users/login',
 		)
 	);
 
@@ -58,5 +58,4 @@ class AppController extends Controller {
 			$this->layout = 'admin';
 		}
 	}
-
 }

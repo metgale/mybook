@@ -13,14 +13,20 @@ class WritingsController extends AppController {
 	 *
 	 * @return void
 	 */
-	public function index() {
+	public function index($conditions = array()) {
+		$default_conditions = array();
+        $conditions = array_merge($default_conditions, $conditions);
+        
 		$this->paginate = array(
+            'conditions' => $conditions,
 			'limit' => 6,
-			'order' => 'writing.created DESC'
+			'order' => 'Writing.created DESC',
+			'contain' => array('User', 'Category'),
 		);
 		$this->set('writings', $this->paginate());
 		$categories = $this->Writing->Category->find('all');
 		$this->set('categories', $categories);
+		$this->render('index');
 	}
 
 	/**
@@ -29,13 +35,11 @@ class WritingsController extends AppController {
 	 * @return void
 	 */
 	public function category($id) {
-		$this->paginate = array(
-			'conditions' => array('Writing.category_id' => $id),
-			'limit' => 6
-		);
-		$this->set('writings', $this->paginate());
+		$this->autoRender = false;
 		$this->set('category', $this->Writing->Category->findById($id));
+		$this->index(array('Writing.category_id' => $id));
 	}
+	
 
 	/**
 	 * view method
@@ -64,6 +68,9 @@ class WritingsController extends AppController {
 		));
 		$comments = $this->paginate('Comment');
 		$this->set('comments', $comments);
+
+		$categories = $this->Writing->Category->find('all');
+		$this->set('categories', $categories);
 
 		if (!$this->request->is('post')) {
 			return false;

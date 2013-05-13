@@ -36,7 +36,8 @@ class UsersController extends AppController {
 	public function index() {
 		$this->paginate = array(
 			'User' => array(
-				'order' => array('writing_count' => 'desc')
+				'order' => array('writing_count' => 'desc'),
+				'contain' => array('Writing')
 			)
 		);
 		$users = $this->paginate();
@@ -63,38 +64,12 @@ class UsersController extends AppController {
 				'conditions' => array(
 					'Writing.user_id' => $id),
 					'order' => 'Writing.created DESC',
-					'contain' => array('User'),
+					'contain' => array('User', 'Category'),
 					'limit' => 6
 		));
 		$writings = $this->paginate('Writing');
 		$this->set('writings', $writings);
 	}
-
-	public function userComments($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		$this->paginate = array(
-			'Comment' => array(
-				'conditions' => array('Comment.user_id' => $id)
-		));
-		$comments = $this->paginate('Comment');
-		$this->set('comments', $comments);
-	}
-	
-	
-	public function userWritings($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		$this->paginate = array(
-			'Writing' => array(
-				'conditions' => array('Writing.user_id' => $id)
-		));
-		$writings = $this->paginate('Writing');
-		$this->set('writings', $writings);
-	}
-
 	/**
 	 * add method
 	 *

@@ -39,9 +39,9 @@
 		?>
 	</head>
 
-	
+
 	<body>
-		<div class="navbar navbar-fixed-top">
+		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
 					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -55,44 +55,34 @@
 						<ul class="nav">
 							<li><a href="/users/index">autori</a></li>
 							<li><a href="/writings/index">tekstovi</a></li>
-							<li><a href="/writings/add">objavi tekst</a></li>
 							<li><a href="/help">grupe</a></li>
 						</ul>
-						<ul class="user-nav">	
+						<ul class="nav user-nav pull-right">
 							<?php if (!AuthComponent::user()): ?>
-								
+								<li><a href="/users/login">Prijava</a></li>
 							<?php elseif (AuthComponent::user()): ?>
-								Pozdrav,<a href="/users/profile/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a>
-								<a href="/users/logout">Odjava</a>
+								<li><a href="/users/profile/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
+								<li><a href="/users/logout">Odjava</a></li>
 							<?php endif ?>
-						</ul>
-						<form class="navbar-search pull-right">
-							<input type="text" class="search-query" placeholder="Pretraži">
-						</form>
-
-
-					</div><!--/.nav-collapse -->	
-
-				</div>
+					</div>
+					<form class="navbar-search pull-right">
+						<input type="text" class="search-query" placeholder="Pretraži">
+					</form>
+				</div><!--/.nav-collapse -->	
 			</div>
-
 		</div>
+	</div>
 
+	<div class="container">
+		<?php echo $this->Session->flash(); ?>
+		<?php echo $this->fetch('content'); ?>
+	</div>
+	<div class="footer"></div>
+	
 
-		<div class="container">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
-
-		</div> <!-- /container -->
-
-		<!-- Le javascript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-		<?php echo $this->Html->script('bootstrap.min'); ?>
-		<?php echo $this->fetch('script'); ?>
-
-	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<?php echo $this->Html->script('bootstrap.min'); ?>
+	<?php echo $this->Html->script('mybookjs'); ?>
+	<?php echo $this->fetch('script'); ?>
+</body>
 </html>

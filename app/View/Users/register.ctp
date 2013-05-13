@@ -6,17 +6,18 @@
 				<?php
 				
 				echo $this->Form->input('username', array(
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
+					'required' => 'required'
+				));
 				echo $this->Form->input('password', array(
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
+					'required' => 'required'
+				));
 				echo $this->Form->input('email', array(
-					'required' => 'required',
-					'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-				);
+					'required' => 'required'
+					
+				));
+				echo $this->Form->input('about', array(
+					'required' => 'required'					
+				));
 				?>
 				<?php echo $this->Form->submit(__('Submit'),
 						array(

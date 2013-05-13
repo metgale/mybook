@@ -13,8 +13,10 @@
 		<meta name="author" content="">
 
 		<!-- Le styles -->
+		<link rel="stylesheet" href="http://localhost/css/bootstrap.css">
+	<link rel="stylesheet" href="http://localhost/css/mybook.css">
 		<?php //echo $this->Html->css(array('bootstrap', 'mybook')); ?>
-		<?php echo $this->Html->css('mybookpdf'); ?>
+		<?php //echo $this->Html->css('mybookpdf'); ?>
 		<?php
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

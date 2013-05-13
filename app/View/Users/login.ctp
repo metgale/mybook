@@ -1,7 +1,7 @@
-<h2>Login</h2>
 <?php
-    echo $this->Form->create();
-    echo $this->Form->input('username');
-    echo $this->Form->input('password');
-    echo $this->Form->end('Login');
-?>  
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+?>

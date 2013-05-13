@@ -1,86 +1,75 @@
-<div class="row-fluid">
-
-
-	<div class="span9">
-
-		<h2><?php echo $writing['Writing']['title'] ?></h2>
-		<dl>
-			<dt><?php echo __('Kategorija'); ?></dt>
-			<dd>
-				<?php echo $this->Html->link($writing['Category']['name'], array('controller' => 'categories', 'action' => 'view', $writing['Category']['id'])); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Objavio:'); ?></dt>
-			<dd>
-				<?php echo $this->Html->link($writing['User']['username'], array('controller' => 'users', 'action' => 'view', $writing['User']['id'])); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Naslov'); ?></dt>
-			<dd>
-				<?php echo h($writing['Writing']['title']); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Opis'); ?></dt>
-			<dd>
-				<?php echo h($writing['Writing']['description']); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Sadržaj'); ?></dt>
-			<dd>
-				<?php echo ($writing['Writing']['content']); ?>
-				&nbsp;
-			</dd>
-			<dt><?php echo __('Objavljeno'); ?></dt>
-			<dd>
-				<?php echo h($writing['Writing']['created']); ?>
-				&nbsp;
-			</dd>
-		</dl>
+<div class="writing-view clearfix">
+	<div class="page-header clearfix">
+		<h1><?php echo $this->assign('title', $writing['Writing']['title']); ?></h1>
+		<h3 class="pull-left">
+			<?php echo $this->html->Link('Writings', array(
+	         			'controller' => 'writings',
+	         			'action' => 'index'
+					)); ?></h3>
+		<ul class="writings-categories pull-right">
+			<?php foreach ($categories as $category): ?>  
+			<li><?php echo $this->Html->link(h($category['Category']['name']), array(
+					'controller' => 'writings',
+					'action' => 'category', $category['Category']['id'])); ?>	</li>
+			<?php endforeach; ?>
+			<li><strong class="publish-cta"><a class="" href="/writings/add">objavi tekst</a></strong></li>
+		</ul>
 	</div>
 
-
-
-	<div class="row-fluid">
-		<div id="comments" class="span9">
-
-			<?php if (!empty($comments)): ?>
-				<table class="table">
-					<tr>
-						<th><?php echo __('User Id'); ?></th>
-						<th><?php echo __('Content'); ?></th>
-						<th><?php echo __('Created'); ?></th>
-						<th><?php echo __('Modified'); ?></th>
-
-					</tr>
-					<?php foreach ($comments as $comment): ?>
-						<tr>
-							<td><?php echo $comment['User']['username']; ?></td>
-							<td><?php echo $comment['Comment']['content']; ?></td>
-							<td><?php echo $comment['Comment']['created']; ?></td>
-							<td><?php echo $comment['Comment']['modified']; ?></td>
-						</tr>
-					<?php endforeach; ?>
-				</table>
-			<?php endif; ?>
-			<?php echo $this->Paginator->pagination(); ?>
+	<h2 class="writing-title"><?php 
+		echo $this->Html->link(h($writing['Writing']['title']), array('action' => 'view', $writing['Writing']['id']), array('class' => 'read-more'));
+	?></h2>
+	<div class="writing-item">
+		<div class="writing-description">
+			<?php echo h($writing['Writing']['description']); ?>
+		</div>
+		<div class="writing-content">
+			<?php echo ($writing['Writing']['content']); ?>
+		</div>
+		<div class="metadata">
+			<span class="writing-author">korisnik <?php echo $this->Html->link($writing['User']['username'], array('controller' => 'users', 'action' => 'view', $writing['User']['id'])); ?>&nbsp;</span>
+			<span class="writing-date"><?php echo $this->Time->timeAgoInWords($writing['Writing']['created']); ?>&nbsp;</span>
+			<span class="writing-category">u kategoriji <?php echo $this->Html->link($writing['Category']['name'], 
+					array('controller' => 'writings', 'action' => 'category', $writing['Category']['id'])); ?>&nbsp;</span>
 		</div>
 	</div>
-	<div class="addcomment">
-		<div class="row-fluid">
-			<div class="span9">
-				<?php echo $this->Form->create('Comment', array('class' => 'form-horizontal')); ?>
-				<fieldset>
-					<legend><?php echo __('Add %s', __('Comment')); ?></legend>
-					<?php
-					echo $this->Form->input('content', array(
+
+	<div class="row">
+		<?php if (!empty($comments)): ?>
+		<div id="comments" class="span8 offset2">
+			<h3>Komentari</h3>
+			<ol class="comments dl-horizontal">
+				<?php foreach ($comments as $comment): ?>
+				<li class="comment">
+					<div class="metadata">
+						<strong class="comment-username"><?php echo $comment['User']['username']; ?></strong>
+						<span class="comment-created"><?php echo $comment['Comment']['created']; ?></span>
+					</div>
+					<p class="comment-content"><?php echo $comment['Comment']['content']; ?></p>
+				</li>
+				<?php endforeach; ?>
+			</ol>
+			<?php echo $this->Paginator->pagination(); ?>
+		</div>
+		<?php endif; ?>
+		
+		<div class="span8 offset2">
+			<?php echo $this->Form->create('Comment', array('class' => 'form-horizontal')); ?>
+			<fieldset>
+				<legend>Komentiraj</legend>
+				<?php
+				echo $this->Form->input('content', array(
 						'required' => 'required',
-						'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
-					);
-					?>
-					<?php echo $this->Form->submit(__('Submit')); ?>
-				</fieldset>
-				<?php echo $this->Form->end(); ?>
-			</div>
+						'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;',
+						'class' => 'input-xxlarge',
+						'rows' => '5',
+					));
+				?>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Pošalji komentar</button>
+				</div>
+			</fieldset>
+			<?php echo $this->Form->end(); ?>
 		</div>
 	</div>
 </div>
