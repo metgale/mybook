@@ -15,10 +15,10 @@ class WritingsController extends AppController {
 	 */
 	public function index($conditions = array()) {
 		$default_conditions = array();
-        $conditions = array_merge($default_conditions, $conditions);
-        
+		$conditions = array_merge($default_conditions, $conditions);
+
 		$this->paginate = array(
-            'conditions' => $conditions,
+			'conditions' => $conditions,
 			'limit' => 6,
 			'order' => 'Writing.created DESC',
 			'contain' => array('User', 'Category'),
@@ -28,7 +28,6 @@ class WritingsController extends AppController {
 		$this->set('categories', $categories);
 		$this->render('index');
 	}
-
 	/**
 	 * index method
 	 *
@@ -39,8 +38,6 @@ class WritingsController extends AppController {
 		$this->set('category', $this->Writing->Category->findById($id));
 		$this->index(array('Writing.category_id' => $id));
 	}
-	
-
 	/**
 	 * view method
 	 *
@@ -72,6 +69,9 @@ class WritingsController extends AppController {
 		$categories = $this->Writing->Category->find('all');
 		$this->set('categories', $categories);
 
+		$this->pdfConfig = array(
+			'filename' => Inflector::slug($writing['Writing']['title'])
+		);
 		if (!$this->request->is('post')) {
 			return false;
 		}
@@ -86,7 +86,6 @@ class WritingsController extends AppController {
 			$this->redirect(array('controller' => 'writings', 'action' => 'view', $id, '#' => 'comments'));
 		}
 	}
-
 	/**
 	 * add method
 	 *
@@ -107,34 +106,40 @@ class WritingsController extends AppController {
 		$users = $this->Writing->User->find('list');
 		$this->set(compact('categories', 'users'));
 	}
-
 	/**
 	 * edit method
 	 *
 	 * @throws NotFoundException
 	 * @param string $id
 	 * @return void
+	 *
+	 * 
+	 * @param string $id
+	 * @throws NotFoundException
 	 */
 	public function edit($id = null) {
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
 		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Writing->save($this->request->data)) {
-				$this->Session->setFlash(__('The writing has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The writing could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Writing.' . $this->Writing->primaryKey => $id));
-			$this->request->data = $this->Writing->find('first', $options);
+		$writing = $this->Writing->findById($id);
+		if(!($writing['Writing']['user_id'] == $this->Auth->User('id'))){
+			throw new NotFoundException(__('Invalid writing'));
 		}
-		$categories = $this->Writing->Category->find('list');
-		$users = $this->Writing->User->find('list');
-		$this->set(compact('categories', 'users'));
-	}
-
+			if ($this->request->is('post') || $this->request->is('put')) {
+				if ($this->Writing->save($this->request->data)) {
+					$this->Session->setFlash(__('The writing has been saved'));
+					$this->redirect(array('action' => 'index'));
+				} else {
+					$this->Session->setFlash(__('The writing could not be saved. Please, try again.'));
+				}
+			} else {
+				$options = array('conditions' => array('Writing.' . $this->Writing->primaryKey => $id));
+				$this->request->data = $this->Writing->find('first', $options);
+			}
+			$categories = $this->Writing->Category->find('list');
+			$users = $this->Writing->User->find('list');
+			$this->set(compact('categories', 'users'));
+		}
 	/**
 	 * delete method
 	 *
@@ -156,7 +161,6 @@ class WritingsController extends AppController {
 		$this->Session->setFlash(__('Writing was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-
 	/**
 	 * admin_index method
 	 *

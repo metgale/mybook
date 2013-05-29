@@ -38,8 +38,6 @@
 		echo $this->fetch('css');
 		?>
 	</head>
-
-
 	<body>
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
@@ -55,34 +53,41 @@
 						<ul class="nav">
 							<li><a href="/users/index">autori</a></li>
 							<li><a href="/writings/index">tekstovi</a></li>
-							<li><a href="/help">grupe</a></li>
+							<li><a href="/writings/add">objavi tekst</a></li>
 						</ul>
 						<ul class="nav user-nav pull-right">
 							<?php if (!AuthComponent::user()): ?>
-								<li><a href="/users/login">Prijava</a></li>
+								<li><a href="#myModal" data-toggle="modal">Prijava</a></li>
+								<li><a href="/users/register" data-toggle="modal">Registracija</a></li>
 							<?php elseif (AuthComponent::user()): ?>
-								<li><a href="/users/profile/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
+								<li><a href="/users/view/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
 								<li><a href="/users/logout">Odjava</a></li>
 							<?php endif ?>
 					</div>
-					<form class="navbar-search pull-right">
-						<input type="text" class="search-query" placeholder="Pretraži">
-					</form>
-				</div><!--/.nav-collapse -->	
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="container">
-		<?php echo $this->Session->flash(); ?>
-		<?php echo $this->fetch('content'); ?>
-	</div>
-	<div class="footer"></div>
-	
+		<div id="myModal" class="modal hide fade pull-right" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">myBook prijava</h3>
+			</div>
+			<div class="modal-body">
+				<?php echo $this->Element('Users/login'); ?>
+			</div>
+		</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-	<?php echo $this->Html->script('bootstrap.min'); ?>
-	<?php echo $this->Html->script('mybookjs'); ?>
-	<?php echo $this->fetch('script'); ?>
-</body>
+
+		<div class="container">
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->fetch('content'); ?>
+		</div>
+		<div class="footer"></div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<?php echo $this->Html->script('bootstrap.min'); ?>
+		<?php echo $this->Html->script('mybookjs'); ?>
+		<?php echo $this->fetch('script'); ?>
+	</body>
 </html>

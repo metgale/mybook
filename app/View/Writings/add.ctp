@@ -1,7 +1,5 @@
 <div class="row-fluid">
 	<div class="span9">
-
-
 		<script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
 		<script type="text/javascript">
 			tinymce.init({
@@ -21,10 +19,6 @@
 				],
 			});
 		</script>
-
-
-
-
 		<?php echo $this->Form->create('Writing', array('class' => 'form-horizontal')); ?>
 		<fieldset>
 			<legend><?php echo __('Add %s', __('Writing')); ?></legend>

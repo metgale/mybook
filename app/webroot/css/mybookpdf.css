@@ -1,7 +1,12 @@
-body{
-	color: red;
+.cover{
+	page-break-after: always;
+	text-align: center;
 }
+.writing-title{
+	font-size:40px;
 
-h2{
-	color:green;
+}
+.writing-author{
+	margin-bottom:100px;
+	font-size:25px;
 }

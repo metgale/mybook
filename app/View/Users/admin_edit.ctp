@@ -1,6 +1,6 @@
 <div class="row-fluid">
 	<div class="span9">
-		<?php echo $this->Form->create('User', array('class' => 'form-horizontal'));?>
+		<?php echo $this->Form->create('User', array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data'));?>
 			<fieldset>
 				<legend><?php echo __('Admin Edit %s', __('User')); ?></legend>
 				<?php

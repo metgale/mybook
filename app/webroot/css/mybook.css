@@ -11,9 +11,9 @@ body{
 .metadata {
 	color: #999;
 }
-	.metadata span {
-		margin-right: 1.5em;
-		text-transform: capitalize;
+.metadata span {
+	margin-right: 1.5em;
+	text-transform: capitalize;
 }
 
 .writing-item {
@@ -21,140 +21,169 @@ body{
 	padding-bottom: 25px;
 	border-bottom: 1px solid #EEE;
 }
-		.writing-title a {
-			color: black;
-		}
-		.writing-cover{
-			float:left;
-			padding-right:20px;
-		}
-		.writing-view .writing-item {
-			max-width: 55em;
-			margin: 30px auto;
-		}
-		.writing-view .writing-title {
-			line-height: 60px;
-			margin-bottom: 30px;
-			letter-spacing: -2px;
-		}
-		.writing-view .writing-description {
-			font-size: 24px;
-			margin-bottom: 30px;
-			line-height: 30px;
-			color: #000;
-		}
-		.writing-view .writing-content {
-			margin-bottom: 30px;
-		}
-		.writings-categories {
-			float: right;
-			list-style-type: none;
-		}
-		.writings-categories li {
-			display: inline;
-		}
-		.writings-categories a {
-			display: block;	
-			float: left;
-			padding: 12px 0 12px 25px;
-		}
-		
+.writing-title a {
+	color: black;
+}
+.writing-cover{
+	float:left;
+	padding-right:20px;
+}
+.writing-view .writing-item {
+	max-width: 55em;
+	margin: 30px auto;
+}
+.writing-view .writing-item-small{
+	margin: 30px auto;
+}
+.writing-view .writing-title {
+	line-height: 60px;
+
+	letter-spacing: -2px;
+}
+.writing-view .writing-description {
+	font-size: 24px;
+	margin-bottom: 30px;
+	line-height: 30px;
+	color: #000;
+}
+.writing-view .writing-content {
+	margin-bottom: 30px;
+}
+
+.writings-categories {
+	float: right;
+	list-style-type: none;
+}
+.writings-categories li {
+	display: inline;
+}
+.writings-categories a {
+	display: block;	
+	float: left;
+	padding: 12px 0 12px 25px;
+}
+
 .comments {
 	margin: 0;
 	list-style-type: none;
 }
-	.comments .comment {
-		padding: 0 0 20px;
-	}
-	.comments .metadata {
-		margin-bottom: 10px;
-	}
+.comments .comment {
+	padding: 0 0 20px;
+}
+.comments .metadata {
+	margin-bottom: 10px;
+}
 
 .publish-cta a {
-		text-decoration: underline;
-		border: 1px solid #EEE;
-		border-radius: 5px;
-		margin: 0 0 0 20px;
-		padding: 10px;
-		text-transform: capitalize;
-	}
-	
+	text-decoration: underline;
+	border: 1px solid #EEE;
+	border-radius: 5px;
+	margin: 0 0 0 20px;
+	padding: 10px;
+	text-transform: capitalize;
+}
+
 .user-item{	
 	margin: 25px 50px;
 	padding-bottom: 25px;
 	border-bottom: 1px solid #EEE;
 }
 
-	.user-item .user-username h4{
-		line-height: 60px;
-		margin-bottom: 30px;
-		letter-spacing: -2px;
-	}
-	.user-item .user-username a{
-		color:black;
-	}
-	.user-item .user-profilethumb{
-		float:left;
-		padding-right:20px;
-		border-radius:33px;
-	}
-	.user-item .user-about blockquote{
-		margin-left:150px;
-	}
+.user-item .user-username h4{
+	line-height: 60px;
+	margin-bottom: 30px;
+	letter-spacing: -2px;
+}
+.user-item .user-username a{
+	color:black;
+}
+.user-item .user-profilethumb{
+	float:left;
+	padding-right:20px;
+	border-radius:33px;
+}
+.user-item .user-about blockquote{
+	margin-left:150px;
+}
 
 .user-view{
 }
-	.user-view .user-data{
-		padding-bottom: 35px;
-		border-bottom: 1px solid #EEE;
-	}
-	
+.user-view .user-data{
+	padding-bottom: 35px;
+	border-bottom: 1px solid #EEE;
+}
+
 .profile .profile-picture{
 	border-radius: 5px;
 	padding-right:20px;
 	border-right: 1px solid #EEE;
 	float:left;
 }
-
-.bio-info{
-	float:left;
-	padding: 20px;
-	font-size:24px;
+.profile .span8{
+	color:#0088cc;
+	font-size: 20px;
+	list-style: none;
+	padding:5px;	
+	border-bottom:  1px solid #EEE;
 }
+
+.profile .span8 li{
+	line-height: 45px;
+}
+
+.profile .span8 ul{
+	color:#B8B2B4;
+	margin-left:0px;
+	margin-bottom:0px;
+	padding-top:15px;
+
+}
+
+.profile .span8 blockquote{
+	font-size: 15px;
+	color:#B8B2B4;
+}
+
 .jumbotron {
 	margin: 60px 0;
 	text-align: center;
 }
-	.jumbotron h1 {
-		font-size: 72px;
-		line-height: 1;
-	}
-	.jumbotron .btn {
-		font-size: 21px;
-		padding: 14px 24px;
-	}
+.jumbotron h1 {
+	font-size: 72px;
+	line-height: 1;
+}
 
-	.jumbotron .btn{
-		width: 100px;
-		margin:10px;
-	}
 
 .footer{
 	margin-top:50px;
 	border-top: 1px solid #EEE;
 }
 
-#UserLoginForm{
+.modal-body .control-group{
 	float:left;
-}
-#UserLoginForm .control-label{
-	float:left;
-}
-#UserLoginForm .btn{
-	float:left;
-	padding:5px;
-	margin:0;
+	text-align: left;
 }
 
+#myModal{
+	width:400px;
+}
+.loginform .btn-success {
+	width:100px;
+	clear:both;
+	float:left;
+	margin-left:0px;
+}
+.jumbotron .btn{
+	width:200px;
+	margin:10px;
+}
+.home p{
+	font-size:18px;
+	color:gray;
+}
 
+.homepagetab  li{
+	font-size:20px;
+	padding:25px;
+}
 

@@ -51,6 +51,11 @@ class AppController extends Controller {
 			'logoutRedirect' => 'users/login',
 		)
 	);
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow();
+	}
 
 	public function beforeRender() {
 		parent::beforeRender();
