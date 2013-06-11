@@ -12,13 +12,6 @@
 
 		<!-- Le styles -->
 		<?php echo $this->Html->css(array('bootstrap', 'mybook')); ?>
-
-
-		<style>
-			body {
-				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-			}
-		</style>
 		<?php //echo $this->Html->css('bootstrap-responsive.min'); ?>
 
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -39,7 +32,7 @@
 		?>
 	</head>
 	<body>
-		<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navigation navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
 					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -52,17 +45,33 @@
 					<div class="nav-collapse">
 						<ul class="nav">
 							<li><a href="/users/index">autori</a></li>
-							<li><a href="/writings/index">tekstovi</a></li>
-							<li><a href="/writings/add">objavi tekst</a></li>
+							<li><a href="/writings/index">samostalne objave</a></li>
+							<li><a href="/books/index">sabrana djela</a></li>
+
 						</ul>
-						<ul class="nav user-nav pull-right">
-							<?php if (!AuthComponent::user()): ?>
-								<li><a href="#myModal" data-toggle="modal">Prijava</a></li>
-								<li><a href="/users/register" data-toggle="modal">Registracija</a></li>
-							<?php elseif (AuthComponent::user()): ?>
-								<li><a href="/users/view/<?php echo AuthComponent::user('id'); ?>"><?php echo AuthComponent::user('username'); ?></a></li>
-								<li><a href="/users/logout">Odjava</a></li>
-							<?php endif ?>
+						<?php if (!AuthComponent::user()) { ?>
+							<ul class="prijava pull-right"><li><?php echo $this->Html->link('Prijava', array('controller' => 'users', 'action' => 'login')) ?></li></ul>
+						<?php } ?>
+						<?php if (AuthComponent::user()) { ?>
+							<ul class="nav user-nav pull-right">
+								<ul class="nav nav-tabs">
+									<li class="dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											<?php echo AuthComponent::user('username'); ?>
+											<b class="caret"></b>
+										</a>
+										<ul class="dropdown-menu">
+											<li><?php echo $this->Html->link('Profil', array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id'))) ?></li>
+											<li> <?php echo $this->Html->link('Moje knjige', array('controller' => 'books', 'action' => 'userbooks', AuthComponent::user('id'))) ?></li>
+											<li> <?php echo $this->Html->link('Moje objave', array('controller' => 'writings', 'action' => 'userwritings', AuthComponent::user('id'))) ?></li>
+											<li><a href="/users/logout">Odjava</a></li>
+										<?php } ?>
+									</ul>
+								</li>
+							</ul>
+
+
+
 					</div>
 				</div>
 			</div>

@@ -1,12 +1,36 @@
+.pdfoutput{
+	font:sans-serif;
+}
+
 .cover{
 	page-break-after: always;
 	text-align: center;
+	font:serif;
 }
 .writing-title{
-	font-size:40px;
-
+	text-transform: uppercase;
+	font-size:50px;
+	padding-bottom: 80px;
 }
 .writing-author{
-	margin-bottom:100px;
-	font-size:25px;
+	padding-bottom: 80px;
+	font-size:30px;
+}
+.writing-description{
+	font-size:20px;
+	padding-top:50px;
+	color:#999;
+}
+.writing-author-location{
+	margin-top:100px;
+}
+.writing-title-text{
+	font:serif;
+}
+.content{
+	page-break-after: always;
+}
+
+.pagebreak{
+	page-break-after: always;
 }

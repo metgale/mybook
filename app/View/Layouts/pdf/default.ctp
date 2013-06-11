@@ -15,9 +15,7 @@
 
 		<!-- Le styles -->
 
-		<link rel="stylesheet" href="http://localhost/css/mybookpdf.css">
-		<?php //echo $this->Html->css(array('bootstrap', 'mybook')); ?>
-		<?php //echo $this->Html->css('mybookpdf'); ?>
+		<?php echo $this->Html->css(array('mybookpdf'), null, array('fullBase' => true) ); ?>
 		<?php
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

@@ -983,7 +983,7 @@ table {
     line-height: 20px;
     text-align: left;
     vertical-align: top;
-    border-top: 1px solid #dddddd;
+    border-bottom:  1px solid #EEE;
 }
 .table th {
     font-weight: bold;

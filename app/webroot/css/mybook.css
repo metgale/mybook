@@ -1,5 +1,5 @@
 body{
-	padding-top: 40px;
+	padding-top: 80px;
 }
 .nav-left{
 	float:top;
@@ -7,7 +7,6 @@ body{
 .page-header {
 	margin-top: 0;
 }
-
 .metadata {
 	color: #999;
 }
@@ -15,8 +14,9 @@ body{
 	margin-right: 1.5em;
 	text-transform: capitalize;
 }
-
 .writing-item {
+	float:left;
+	clear:both;
 	margin: 25px 50px;
 	padding-bottom: 25px;
 	border-bottom: 1px solid #EEE;
@@ -37,7 +37,6 @@ body{
 }
 .writing-view .writing-title {
 	line-height: 60px;
-
 	letter-spacing: -2px;
 }
 .writing-view .writing-description {
@@ -49,7 +48,6 @@ body{
 .writing-view .writing-content {
 	margin-bottom: 30px;
 }
-
 .writings-categories {
 	float: right;
 	list-style-type: none;
@@ -74,15 +72,6 @@ body{
 	margin-bottom: 10px;
 }
 
-.publish-cta a {
-	text-decoration: underline;
-	border: 1px solid #EEE;
-	border-radius: 5px;
-	margin: 0 0 0 20px;
-	padding: 10px;
-	text-transform: capitalize;
-}
-
 .user-item{	
 	margin: 25px 50px;
 	padding-bottom: 25px;
@@ -100,73 +89,15 @@ body{
 .user-item .user-profilethumb{
 	float:left;
 	padding-right:20px;
-	border-radius:33px;
-}
-.user-item .user-about blockquote{
-	margin-left:150px;
+	border-radius:15px;
+	height: 100px;
 }
 
-.user-view{
-}
 .user-view .user-data{
 	padding-bottom: 35px;
 	border-bottom: 1px solid #EEE;
 }
 
-.profile .profile-picture{
-	border-radius: 5px;
-	padding-right:20px;
-	border-right: 1px solid #EEE;
-	float:left;
-}
-.profile .span8{
-	color:#0088cc;
-	font-size: 20px;
-	list-style: none;
-	padding:5px;	
-	border-bottom:  1px solid #EEE;
-}
-
-.profile .span8 li{
-	line-height: 45px;
-}
-
-.profile .span8 ul{
-	color:#B8B2B4;
-	margin-left:0px;
-	margin-bottom:0px;
-	padding-top:15px;
-
-}
-
-.profile .span8 blockquote{
-	font-size: 15px;
-	color:#B8B2B4;
-}
-
-.jumbotron {
-	margin: 60px 0;
-	text-align: center;
-}
-.jumbotron h1 {
-	font-size: 72px;
-	line-height: 1;
-}
-
-
-.footer{
-	margin-top:50px;
-	border-top: 1px solid #EEE;
-}
-
-.modal-body .control-group{
-	float:left;
-	text-align: left;
-}
-
-#myModal{
-	width:400px;
-}
 .loginform .btn-success {
 	width:100px;
 	clear:both;
@@ -177,13 +108,113 @@ body{
 	width:200px;
 	margin:10px;
 }
-.home p{
-	font-size:18px;
-	color:gray;
+
+#delimiter{
+	clear:both;
+	padding-top:20px;
+	border-bottom: 1px solid #EEE;
 }
 
-.homepagetab  li{
-	font-size:20px;
-	padding:25px;
+#rightinfo li{
+	padding-bottom:5px;
+	padding-top:5px;
+	list-style-type: none;
+}
+#rightinfo p{
+	padding-left:50px;
+	padding-bottom:20px;
+	font-style: italic;
+	font-size: 12px;
+}
+#rightinfo a{
+	border-right:1px solid #EEE;
+	padding-right:20px;
+	float:right;
+	margin-right:50px;
+}
+#profile{
+	border-bottom: 1px solid #EEE;
+}
+.profile-nav li{
+	font-weight: bold;
+	list-style-type: none;
+	padding-top:20px;
 }
 
+.prijava{
+	padding-top: 10px;
+}
+.prijava a{
+	color: #999999;
+}
+.prijava a:hover{
+	color:white;
+	text-decoration: none;
+}
+
+.homepage .hero-unit{
+	text-align: center;
+}
+.hero-unit{
+	background:white;
+}
+.hero-unit h1{
+	padding-bottom: 20px;	
+}
+.hero-unit a{
+	font-weight: bold;
+
+}
+
+.userbooks .actions{
+	padding-left:75px;
+}
+.userbooks .actions a{
+	margin-left:5px;
+	margin-right:5px;
+}
+
+.userbooks .table .btn{
+	font-weight: normal;
+}
+
+
+.userwritings .actions{
+	padding-left:75px;
+}
+.userwritings .actions a{
+	margin-left:5px;
+	margin-right:5px;
+}
+
+.userwritings .table .btn{
+	font-weight: normal;
+}
+
+#title{
+	font-size: 15px;
+}
+
+.books-index span4{
+	float:left;
+}
+.books-index .writing-item{
+	clear:none;
+}
+
+.navigation{
+	text-transform: capitalize;
+}
+div.mce-fullscreen{
+	padding-top:50px;
+}
+
+.table tbody tr td{
+	vertical-align: middle;
+}
+.user-actions{
+	margin-top:30px;
+}
+.user-actions .btn{
+	margin-left:5px;
+}

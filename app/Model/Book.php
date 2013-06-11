@@ -3,28 +3,25 @@
 App::uses('AppModel', 'Model');
 
 /**
- * Writing Model
+ * Book Model
  *
- * @property Category $Category
  * @property User $User
- * @property Comment $Comment
+ * @property Category $Category
+ * @property Writing $Writing
  */
-class Writing extends AppModel {
+class Book extends AppModel {
+
+	public $displayField = 'title';
 
 	/**
 	 * Validation rules
 	 *
 	 * @var array
 	 */
-	
-	
-	
-	public $displayField = 'title';
-
 	public $validate = array(
-		'category_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+		'title' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
 			//'message' => 'Your custom message here',
 			//'allowEmpty' => false,
 			//'required' => false,
@@ -42,29 +39,9 @@ class Writing extends AppModel {
 			//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'title' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-			//'message' => 'Your custom message here',
-			//'allowEmpty' => false,
-			//'required' => false,
-			//'last' => false, // Stop validation after this rule
-			//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'description' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-			//'message' => 'Your custom message here',
-			//'allowEmpty' => false,
-			//'required' => false,
-			//'last' => false, // Stop validation after this rule
-			//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'content' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+		'category_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 			//'message' => 'Your custom message here',
 			//'allowEmpty' => false,
 			//'required' => false,
@@ -82,22 +59,20 @@ class Writing extends AppModel {
 	 * @var array
 	 */
 	public $belongsTo = array(
-		'Category' => array(
-			'className' => 'Category',
-			'foreignKey' => 'category_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'User' => array(
-			'counterCache' => true,
 			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'Book'
+		'Category' => array(
+			'className' => 'Category',
+			'foreignKey' => 'category_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
 	);
 
 	/**
@@ -106,9 +81,9 @@ class Writing extends AppModel {
 	 * @var array
 	 */
 	public $hasMany = array(
-		'Comment' => array(
-			'className' => 'Comment',
-			'foreignKey' => 'writing_id',
+		'Writing' => array(
+			'className' => 'Writing',
+			'foreignKey' => 'book_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

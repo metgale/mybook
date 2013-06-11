@@ -2,20 +2,38 @@
 
 class HomeController extends AppController {
 	
-	public $uses = array('Writing');
+	public $uses = array('Book');
 	
 	public function index() {
 		$this->paginate = array(
-			'Writing' => array(
-					'order' => 'Writing.created DESC',
-					'limit' => 5,
-					'contain' => array('User', 'Category')
+			'Book' => array('conditions' => array('Book.featured' => true),
+			'limit' => 1,
+			'contain' => array('User', 'Writing', 'Category')
 				));
-		$writings = $this->paginate('Writing');
-		$this->set('latestWritings', $writings);
-		$users = $this->Writing->User->find('all');
-		$this->set('users', $users);
+		$this->set('featuredbook', $this->paginate());
+		
+		$options = array(
+			'order' => 'Writing.created DESC',
+			'limit' => 3,
+			'contain' => array('User', 'Category')
+		);
+		$latestwritings = $this->Book->Writing->find('all', $options);
+		$this->set('latestwritings', $latestwritings);
+		
+		$options_ = array(
+			'order' => 'Book.created DESC',
+			'limit' => 5
+		);
+		$latestbooks = $this->Book->find('all', $options_);
+		$this->set('latestbooks', $latestbooks);
+		
+		$options = array(
+			'limit' => 1,
+			'conditions' => array('User.featured' => true)
+			
+		);
+		$featureduser = $this->Book->User->find('all', $options);
+		$this->set('featureduser', $featureduser);
 	}
 }
-
 ?>

@@ -21,26 +21,42 @@
 		</script>
 		<?php echo $this->Form->create('Writing', array('class' => 'form-horizontal')); ?>
 		<fieldset>
-			<legend><?php echo __('Add %s', __('Writing')); ?></legend>
+			<?php if ($book): ?>
+			<legend>Dodavanje teksta u knjizi "<?php echo $book['Book']['title']?>"</legend>
+			<?php endif; ?>
 			<?php
 			echo $this->Form->input('category_id', array(
+				'label' => 'Kategorija',
 				'required' => 'required',
 				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 			);
-
+			if (!$book){
+			echo $this->Form->input('book_id', 
+					array('options' => $userbooks,'label' => 'Odaberite knjigu','empty' => true));
+			}
 			echo $this->Form->input('title', array(
+				'label' => 'Naslov',
 				'required' => 'required',
 				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 			);
 			echo $this->Form->input('description', array(
+				'label' => 'Opis',
 				'required' => 'required',
 				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 			);
+			
+			echo $this->Form->input('sort', array(
+				'empty' => true,
+				'label' => 'Poglavlje',
+				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+			);
+			
 			echo $this->Form->input('content', array(
+				'label' => 'Sadržaj',
 				'required' => false
 			));
 			?>
-			<?php echo $this->Form->submit(__('Submit')); ?>
+			<?php echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-success')); ?>
 		</fieldset>
 		<?php echo $this->Form->end(); ?>
 	</div>

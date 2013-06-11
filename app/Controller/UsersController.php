@@ -12,7 +12,10 @@ class UsersController extends AppController {
 	public function login() {
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
-				return $this->redirect($this->Auth->redirectUrl());
+				return $this->redirect(array(
+					'controller' => 'users',
+					'action' => 'profile', $this->Auth->user('id')
+				));
 			} else {
 				$this->Session->setFlash('Username or password is incorrect', 'default', array(), 'auth');
 			}
@@ -54,7 +57,7 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		$options = array(
-			'conditions' => array('User.' . $this->User->primaryKey => $id),
+			'conditions' => array('User.id' => $id),
 			'contain' => array('Writing', 'Comment'));
 		$this->set('user', $this->User->find('first', $options));
 		$this->paginate = array(
@@ -67,7 +70,24 @@ class UsersController extends AppController {
 		));
 		$writings = $this->paginate('Writing');
 		$this->set('writings', $writings);
+		
+	
 	}
+	
+	public function profile($id=null){
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		if(!($this->Auth->User('id') == $id)){
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$options = array(
+			'conditions' => array('User.' . $this->User->primaryKey => $id),
+			'contain' => array('Writing', 'Comment', 'Book'));	
+		$this->set('user', $this->User->find('first', $options));	
+	}
+	
+	
 	
 	public function edit($id = null) {
 		if(!($this->Auth->User('id') == $id)){

@@ -22,7 +22,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 App::uses('Controller', 'Controller');
-
+ 
 /**
  * Application Controller
  *
@@ -35,6 +35,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
 	public $helpers = array(
+		'Gravatar',
 		'Session',
 		'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
 		'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),

@@ -26,7 +26,7 @@
 		<?php
 		if (AuthComponent::user('id') == $writing['Writing']['user_id']):
 			echo $this->Html->link('Uredi tekst', array(
-				'controller'=> 'writings',
+				'controller' => 'writings',
 				'action' => 'edit', $writing['Writing']['id']));
 		endif;
 		?>
@@ -35,6 +35,7 @@
 		<?php
 		if (AuthComponent::user()):
 			echo $this->Html->link('Preuzmi pdf', array('action' => 'view', $writing['Writing']['id'] . '.pdf'), array('class' => 'read-more'));
+			echo '<br>' . $this->Html->link('Preuzmi epub', array('action' => 'epub', $writing['Writing']['id']), array('class' => 'read-more'));
 		endif;
 		?>
 	</ul>
@@ -43,22 +44,36 @@
 			<?php echo h($writing['Writing']['description']); ?>
 		</div>
 		<div class="writing-content">
-<?php echo nl2br(($writing['Writing']['content'])); ?>
+			<?php echo nl2br(($writing['Writing']['content'])); ?>
 		</div>
 		<div class="metadata">
 			<span class="writing-author">korisnik <?php echo $this->Html->link($writing['User']['username'], array('controller' => 'users', 'action' => 'view', $writing['User']['id'])); ?>&nbsp;</span>
 			<span class="writing-date"><?php echo $this->Time->timeAgoInWords($writing['Writing']['created']); ?>&nbsp;</span>
 			<span class="writing-category">u kategoriji <?php echo $this->Html->link($writing['Category']['name'], array('controller' => 'writings', 'action' => 'category', $writing['Category']['id']));
-?>&nbsp;</span>
+			?>&nbsp;</span>
+		</div>
+	</div>
+	<div class="row">
+		<div id="related-writings" class="span8 offset2">	
+			<h3>Povezane objave</h3>
+			<?php foreach ($related as $related): ?>    
+				<h5 class="writing-title"><?php
+				echo $this->Html->link(h($related['Writing']['title']), array('action' => 'view', $related['Writing']['id']), array('class' => 'read-more'));
+				?> &rarr;</h5>
+					<?php #echo $this->Html->link('Pročitaj', array('action' => 'view', $writing['Writing']['id']), array('class' => 'read-more')); ?>	
+			<?php endforeach; ?>
+
 		</div>
 	</div>
 
+
+
 	<div class="row">
-<?php if (!empty($comments)): ?>
+		<?php if (!empty($comments)): ?>
 			<div id="comments" class="span8 offset2">
 				<h3>Komentari</h3>
 				<ol class="comments dl-horizontal">
-	<?php foreach ($comments as $comment): ?>
+					<?php foreach ($comments as $comment): ?>
 						<li class="comment">
 							<div class="metadata">
 								<strong class="comment-username"><?php echo $comment['User']['username']; ?></strong>
@@ -66,15 +81,14 @@
 							</div>
 							<p class="comment-content"><?php echo h($comment['Comment']['content']); ?></p>
 						</li>
-				<?php endforeach; ?>
+					<?php endforeach; ?>
 				</ol>
-			<?php echo $this->Paginator->pagination(); ?>
+				<?php echo $this->Paginator->pagination(); ?>
 			</div>
 		<?php endif; ?>
-
-			<?php if (AuthComponent::user()): ?>
+		<?php if (AuthComponent::user()): ?>
 			<div class="span8 offset2">
-					<?php echo $this->Form->create('Comment', array('class' => 'form-horizontal')); ?>
+				<?php echo $this->Form->create('Comment', array('class' => 'form-horizontal')); ?>
 				<fieldset>
 					<legend>Komentiraj</legend>
 					<?php
@@ -89,12 +103,9 @@
 						<button type="submit" class="btn btn-primary">Pošalji komentar</button>
 					</div>
 				</fieldset>
-			<?php echo $this->Form->end(); ?>
+				<?php echo $this->Form->end(); ?>
 			</div>
-
-<?php endif; ?>
-
-
+		<?php endif; ?>
 	</div>
 </div>
 

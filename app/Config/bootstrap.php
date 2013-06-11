@@ -118,13 +118,14 @@ CakeLog::config('error', array(
             'outline' => true,
             'dpi' => 96,
 			'footer-left'=>'[page]'
-        ),
+			),
 	   'margin' => array(
-            'bottom' => 15,
-            'left' => 25,
-            'right' => 20,
-            'top' => 25
+            'bottom' => 10,
+            'left' => 20,
+            'right' => 10,
+            'top' => 15
 		   ),
+	 
         //'orientation' => 'landscape',
         'download' => true,
 	    'binary' => 'C:\www\wkhtmltopdf\wkhtmltopdf.exe'

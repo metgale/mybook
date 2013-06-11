@@ -92,7 +92,8 @@ class User extends AppModel {
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
-        )
+        ),
+		'Book'
     );
 
     public function beforeSave($options = array()) {
