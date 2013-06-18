@@ -1,6 +1,6 @@
 <div class="page-header writings-index clearfix">
 	<h3 class="pull-left">
-		<?php echo $this->html->Link('Writings', array(
+		<?php echo $this->html->Link('Objave', array(
          			'controller' => 'writings',
          			'action' => 'index'
 				)); ?></h3>
@@ -30,11 +30,15 @@
 					<span class="writing-date"><?php echo $this->Time->timeAgoInWords($writing['Writing']['created']); ?>&nbsp;</span>
 					<span class="writing-category">u kategoriji <?php echo $this->Html->link($writing['Category']['name'], 
 					array('controller' => 'writings', 'action' => 'category', $writing['Category']['id'])); ?>&nbsp;</span>	
-					<span class="writing-book">Odlomak knjige: <?php echo  $this->Html->link($writing['Book']['title'], array(
-						'controller' => 'books',
-						'action' => 'view',
-						$writing['Book']['id']						
-					)) ?>&nbsp;</span>
+					<span class="writing-book">
+						<?php if($writing['Book']['id'] == null): ?>
+						Samostalna objava
+						<?php else: ?>
+						Objava u knjizi:					
+						<?php endif; ?>
+						<?php echo $this->Html->link($writing['Book']['title'], array('controller' => 'books','action' => 'view',	$writing['Book']['id']))
+						?>&nbsp;
+					</span>
 				</div>
 		<?php #echo $this->Html->link('Pročitaj', array('action' => 'view', $writing['Writing']['id']), array('class' => 'read-more')); ?>	
 			</div>

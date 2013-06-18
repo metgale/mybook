@@ -1,7 +1,7 @@
 <div class="page-header clearfix">
 	<h3 class="pull-left">
 		<?php
-		echo $this->html->Link('Books', array(
+		echo $this->html->Link('Knjige', array(
 			'controller' => 'books',
 			'action' => 'index'
 		));

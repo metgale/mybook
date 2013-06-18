@@ -1,6 +1,6 @@
 <div class="page-header writings-index clearfix">
 	<h3 class="pull-left">
-		<?php echo $this->html->Link('Books', array(
+		<?php echo $this->html->Link('Knjige', array(
          			'controller' => 'books',
          			'action' => 'index'
 				)); ?></h3>

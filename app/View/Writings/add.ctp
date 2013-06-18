@@ -48,7 +48,7 @@
 			echo $this->Form->input('sort', array(
 				'empty' => true,
 				'label' => 'Poglavlje',
-				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+				'helpInline' => '<span class="label label-important">' . __('Unos potreban ukoliko je objava dio knjige') . '</span>&nbsp;')
 			);
 			
 			echo $this->Form->input('content', array(

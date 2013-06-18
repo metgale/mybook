@@ -3,7 +3,7 @@
 		<h1><?php echo $this->assign('title', $writing['Writing']['title']); ?></h1>
 		<h3 class="pull-left">
 			<?php
-			echo $this->html->Link('Writings', array(
+			echo $this->html->Link('Objave', array(
 				'controller' => 'writings',
 				'action' => 'index'
 			));

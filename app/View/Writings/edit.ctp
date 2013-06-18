@@ -21,7 +21,7 @@
 			});
 		</script>
 		<fieldset>
-			<legend><?php echo __('Edit %s', __('Writing')); ?></legend>
+			<legend><?php echo __('Uredi %s', __('Objavu')); ?></legend>
 			<?php
 			echo $this->Form->input('title', array(
 				'required' => 'required',
@@ -29,10 +29,14 @@
 			);
 			echo $this->Form->input('book_id', array(
 				'options' => $userbooks,
-				'required' => 'required',
 				'empty' => true,
 				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 			);
+			echo $this->Form->input('category_id', array(
+				'required' => 'required',
+				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
+			);			
+			
 			echo $this->Form->input('description', array(
 				'required' => 'required',
 				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
