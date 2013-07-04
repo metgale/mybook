@@ -1,7 +1,7 @@
 <div class="page-header writings-index clearfix">
 	<h3 class="pull-left">
 		<?php
-		echo $this->html->Link('Korisnici', array(
+		echo $this->html->Link('Autori', array(
 			'controller' => 'users',
 			'action' => 'index'
 		));
@@ -11,7 +11,14 @@
 	<div class="span12">
 		<?php foreach ($users as $user): ?>
 			<div class="user-item">
-					<img class ="user-profilethumb" src="/img/profilethumb.jpg">
+				<?php if ($user['User']['image']) { ?>
+					<img class ="user-profilethumb" src="<?php echo $user['User']['image'] ?>">
+				<?php } ?>
+				<?php if (!$user['User']['image']) { ?>
+					<img class ="user-profilethumb" src="/img/missing.jpg">
+				<?php } ?>
+
+
 				<h2 class="user-username">
 					<?php echo $this->Html->Link(($user['User']['username']), array('action' => 'view', $user['User']['id']), array('class' => 'read-more')); ?>&rarr;
 				</h2>
@@ -21,10 +28,7 @@
 					</blockquote>
 				</div>
 				<div class="metadata">
-					<span class="user-registered">Registriran <?php
-						App::uses('CakeTime', 'Utility');
-						echo CakeTime::timeAgoInWords(($user['User']['created']), array('accuracy' => array('month' => 'month'), 'end' => '1 year'));
-						?>&nbsp;</span>
+					<span class="user-registered">Registriran <?php echo $this->Time->format('d.m.Y.', $user['User']['created']); ?>&nbsp;</span>
 					<span class="user-pubcount">Objavio <?php echo $user['User']['writing_count'] ?> djela </span>
 				</div>
 			</div>

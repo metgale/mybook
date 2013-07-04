@@ -9,10 +9,10 @@
 					"advlist autolink lists link image charmap print preview hr anchor pagebreak",
 					"searchreplace wordcount visualblocks visualchars code fullscreen",
 					"insertdatetime media nonbreaking save table contextmenu directionality",
-					"emoticons template paste"
+					"template paste"
 				],
 				toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-				toolbar2: "print preview media | forecolor backcolor emoticons",
+				toolbar2: "print preview media | forecolor backcolor",
 				templates: [
 					{title: 'Test template 1', content: 'Test 1'},
 					{title: 'Test template 2', content: 'Test 2'}
@@ -22,7 +22,7 @@
 		<?php echo $this->Form->create('Writing', array('class' => 'form-horizontal')); ?>
 		<fieldset>
 			<?php if ($book): ?>
-			<legend>Dodavanje teksta u knjizi "<?php echo $book['Book']['title']?>"</legend>
+				<legend>Dodavanje teksta u knjizi "<?php echo $book['Book']['title'] ?>"</legend>
 			<?php endif; ?>
 			<?php
 			echo $this->Form->input('category_id', array(
@@ -30,9 +30,8 @@
 				'required' => 'required',
 				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 			);
-			if (!$book){
-			echo $this->Form->input('book_id', 
-					array('options' => $userbooks,'label' => 'Odaberite knjigu','empty' => true));
+			if (!$book) {
+				echo $this->Form->input('book_id', array('options' => $userbooks, 'label' => 'Odaberite knjigu', 'empty' => true));
 			}
 			echo $this->Form->input('title', array(
 				'label' => 'Naslov',
@@ -44,19 +43,22 @@
 				'required' => 'required',
 				'helpInline' => '<span class="label label-important">' . __('Required') . '</span>&nbsp;')
 			);
-			
+
 			echo $this->Form->input('sort', array(
 				'empty' => true,
 				'label' => 'Poglavlje',
 				'helpInline' => '<span class="label label-important">' . __('Unos potreban ukoliko je objava dio knjige') . '</span>&nbsp;')
 			);
-			
+
 			echo $this->Form->input('content', array(
 				'label' => 'Sadržaj',
-				'required' => false
+				'required' => false)
+			);
+			echo $this->Form->input('published', array(
+			'label' => 'Objavi'
 			));
 			?>
-			<?php echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-success')); ?>
+			<?php echo $this->Form->submit(__('Potvrdi'), array('class' => 'btn btn-success')); ?>
 		</fieldset>
 		<?php echo $this->Form->end(); ?>
 	</div>

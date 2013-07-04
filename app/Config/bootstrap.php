@@ -72,6 +72,9 @@ Cache::config('default', array('engine' => 'File'));
 CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
 CakePlugin::load('DebugKit');
 CakePlugin::load('TwitterBootstrap');
+CakePlugin::load('Attach');
+
+
 /**
  * You can attach event listeners to the request lifecyle as Dispatcher Filter . By Default CakePHP bundles two filters:
  *
@@ -129,5 +132,6 @@ CakeLog::config('error', array(
         //'orientation' => 'landscape',
         'download' => true,
 	    'binary' => 'C:\www\wkhtmltopdf\wkhtmltopdf.exe'
+	   // 'binary' => '/usr/bin/wkhtmltopdf'
     ));
 

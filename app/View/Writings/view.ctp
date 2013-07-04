@@ -3,7 +3,7 @@
 		<h1><?php echo $this->assign('title', $writing['Writing']['title']); ?></h1>
 		<h3 class="pull-left">
 			<?php
-			echo $this->html->Link('Objave', array(
+			echo $this->html->Link('Tekstovi', array(
 				'controller' => 'writings',
 				'action' => 'index'
 			));
@@ -22,6 +22,9 @@
 	<h2 class="writing-title"><?php
 		echo $this->Html->link(h($writing['Writing']['title']), array('action' => 'view', $writing['Writing']['id']), array('class' => 'read-more'));
 		?></h2>
+		
+		(<?php if($allowComments):?>Objavljeno u knjizi:<?php else: ?>Neobjavljeni tekst u knjizi: <?php endif;?><?php echo $this->Html->link(h($writing['Book']['title']), array('controller' => 'books', 'action' => 'view', $writing['Book']['id'])) ?>)
+	
 	<ul class="uredi pull-right">
 		<?php
 		if (AuthComponent::user('id') == $writing['Writing']['user_id']):
@@ -48,7 +51,7 @@
 		</div>
 		<div class="metadata">
 			<span class="writing-author">korisnik <?php echo $this->Html->link($writing['User']['username'], array('controller' => 'users', 'action' => 'view', $writing['User']['id'])); ?>&nbsp;</span>
-			<span class="writing-date"><?php echo $this->Time->timeAgoInWords($writing['Writing']['created']); ?>&nbsp;</span>
+			<span class="writing-date">objavljeno <?php echo $this->Time->format('d.m.Y.', $writing['Writing']['created']); ?>&nbsp;</span>
 			<span class="writing-category">u kategoriji <?php echo $this->Html->link($writing['Category']['name'], array('controller' => 'writings', 'action' => 'category', $writing['Category']['id']));
 			?>&nbsp;</span>
 		</div>
@@ -65,7 +68,6 @@
 
 		</div>
 	</div>
-
 
 
 	<div class="row">
@@ -86,7 +88,7 @@
 				<?php echo $this->Paginator->pagination(); ?>
 			</div>
 		<?php endif; ?>
-		<?php if (AuthComponent::user()): ?>
+		<?php if (AuthComponent::user() && $allowComments): ?>
 			<div class="span8 offset2">
 				<?php echo $this->Form->create('Comment', array('class' => 'form-horizontal')); ?>
 				<fieldset>

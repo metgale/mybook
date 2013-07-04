@@ -13,30 +13,33 @@
 	</ul>
 </div>
 
-<div class="row clearfix">
-    <div class="span12">
-		<?php foreach ($books as $book): ?>    
-			<div class="writing-item">
-				<img class ="writing-cover" src="/img/book_cover.jpg">
-				<h2 class="writing-title">
-					<?php echo $this->Html->link($book['Book']['title'], array(
-						'controller' => 'books', 'action' => 'view', $book['Book']['id'])); ?> &rarr;
-				</h2>
-				<div class="writing-description">
-					<p><?php echo h($book['User']['about']); ?></p>
+<div class="books row">
+    <div class="span12 clearfix">  
+		<?php foreach ($books as $book): ?>
+			<div class="media">
+				<?php if (isset($book['Book']['cover'])) { ?>
+					<a class="pull-left" href="#">
+						<img class="media-object" src="<?php echo $book['Book']['cover'] ?>">
+					</a>
+				<?php }?>
+				
+
+				<div class="media-body">
+					<div class="media-heading">
+						<h2 class="writing-title"><?php
+							echo $this->Html->link(h($book['Book']['title']), array('action' => 'view', $book['Book']['id']), array('class' => 'read-more'));
+							?> &rarr;</h2>
+						<p><?php echo $book['Book']['description'] ?> </p>
+						<div class="metadata">
+							<span class="writing-author">korisnik <?php echo $this->Html->link($book['User']['username'], array('controller' => 'users', 'action' => 'view', $book['User']['id'])); ?>&nbsp;</span>
+							<span class="writing-date">objavljeno <?php echo $this->Time->format('d.m.Y.', $book['Book']['created']); ?>&nbsp;</span>
+							<span class="writing-category">u kategoriji <?php echo $this->Html->link($book['Category']['name'], array('controller' => 'writings', 'action' => 'category', $book['Category']['id']));
+							?>&nbsp;</span>	
+						</div>
+					</div>
 				</div>
-				<div class="metadata">
-					<span class="writing-author">
-						Korisnik <?php echo $this->Html->link($book['User']['username'], array(
-						'controller' => 'users', 'action' => 'view', $book['User']['id'])); ?> &rarr;
-						&nbsp;</span>
-					<span class="writing-date"></span>
-					<span class="writing-category">&nbsp;</span>
-					<span class="writing-book">Broj objava u knjizi: <?php echo $book['Book']['writing_count'] ?>&nbsp;</span>
-				</div>
-				<?php #echo $this->Html->link('Pročitaj', array('action' => 'view', $writing['Writing']['id']), array('class' => 'read-more')); ?>	
 			</div>
-		<?php endforeach; ?>
+		<?php endforeach ?>
 	</div>
 </div>
 

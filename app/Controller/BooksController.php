@@ -58,7 +58,8 @@ class BooksController extends AppController {
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'limit' => 6,
-			'contain' => array('User', 'Category'),
+			'contain' => array('User', 'Category', 'AttachmentImage'),
+			'conditions' => array('Book.published' => 1)
 		);
 		$this->set('books', $this->paginate());
 		$categories = $this->Book->Category->find('all');
@@ -95,9 +96,10 @@ class BooksController extends AppController {
 
 	public function user($id) {
 		$this->paginate = array(
-			'conditions' => array('Book.user_id' => $id),
+			'conditions' => array('Book.user_id' => $id, 'Book.published' => 1),
 			'order' => 'Book.created DESC',
 			'contain' => array('User', 'Category', 'Writing'),
+			
 		);
 		$this->set('books', $this->paginate());
 		$this->set('category', $this->Book->Category->findById($id));
@@ -118,28 +120,40 @@ class BooksController extends AppController {
 		}
 		$options = array(
 			'conditions' => array('Book.' . $this->Book->primaryKey => $id),
-			'contain' => array('Category', 'User', 'Writing'));
+			'contain' => array('Category', 'User', 'Writing', 'AttachmentImage'));
 		$this->set('book', $this->Book->find('first', $options));
 		$categories = $this->Book->Category->find('all');
 		$this->set('categories', $categories);
 
 		$writings = $this->Book->Writing->find('all', array(
 			'conditions' => array(
-				'Writing.book_id' => $id
+				'Writing.book_id' => $id,
+				'Writing.published' => 1
 			),
 			'order' => 'Writing.sort ASC'
 		));
 		$this->set('writings', $writings);
-
+		
 		if ($this->request->query('writing_id')) {
 			$firstwriting = $this->Book->Writing->find('first', array(
-				'contain' => array('User', 'Category'),
+				'contain' => array('User', 'Category', 'Comment'),
 				'order' => 'Writing.sort ASC',
 				'conditions' => array(
+					'Writing.published' => 1,
 					'Writing.id' => $this->request->query('writing_id')
 				)
 			));
+			
+			$comments = $this->Book->Writing->Comment->find('all', array(
+				'contain' => array('User'),
+				'order' => 'Comment.created DESC',
+				'conditions' => array(
+					'Comment.writing_id' => $this->request->query('writing_id')
+				)
+			));
+			$this->set('comments', $comments);
 			$this->set('firstwriting', $firstwriting);
+			$firstId = $firstwriting['Writing']['id'];
 		} else {
 
 			$firstwriting = $this->Book->Writing->find('first', array(
@@ -149,7 +163,36 @@ class BooksController extends AppController {
 					'Writing.book_id' => $id
 				)
 			));
+			$comments = $this->Book->Writing->Comment->find('all', array(
+				'contain' => array('User'),
+				'order' => 'Comment.created DESC',
+				'conditions' => array(
+					'Comment.writing_id' => $firstwriting['Writing']['id']
+				)
+			));
+			$this->set('comments', $comments);
 			$this->set('firstwriting', $firstwriting);
+			$firstId = $firstwriting['Writing']['id'];
+		}
+		
+		if (!$this->request->is('post')) {
+			return false;
+		}
+		if (empty($this->request->data)) {
+			$this->Session->setFlash('Niste unijeli komentar');
+			return false;
+		}
+		$this->request->data['Comment']['user_id'] = $this->Auth->user('id');
+		$this->request->data['Comment']['writing_id'] = $firstId;
+		if ($this->Book->Writing->Comment->save($this->request->data)) {
+			$this->Session->setFlash(
+					('Hvala na komentaru :)'), 'alert', array(
+				'plugin' => 'TwitterBootstrap',
+				'class' => 'alert-success'
+					)
+			);
+			
+			$this->redirect(array('controller' => 'books', 'action' => 'view', $id, '?' => array('writing_id' => $firstId), '#' => 'comments'));
 		}
 	}
 
@@ -164,7 +207,7 @@ class BooksController extends AppController {
 			$this->request->data['Book']['user_id'] = $this->Auth->user('id');
 			if ($this->Book->save($this->request->data)) {
 				$this->Session->setFlash(
-						__('The %s has been saved', __('book')), 'alert', array(
+						__('The %s has been saved', __('writing')), 'alert', array(
 					'plugin' => 'TwitterBootstrap',
 					'class' => 'alert-success'
 						)
@@ -194,20 +237,25 @@ class BooksController extends AppController {
 		$this->Book->id = $id;
 
 		$book = $this->Book->findById($id);
+		
+		$image = $this->Book->AttachmentImage->find('all');
+		debug($image);
 		$this->set('book', $book);
 		if (!$book) {
 			throw new NotFoundException(__('Invalid %s', __('book')));
 		}
 
 		if ($this->request->is('post') || $this->request->is('put')) {
+			
 			if ($this->Book->save($this->request->data)) {
+				
 				$this->Session->setFlash(
 						__('The %s has been saved', __('book')), 'alert', array(
 					'plugin' => 'TwitterBootstrap',
 					'class' => 'alert-success'
 						)
 				);
-				$this->redirect(array('action' => 'userbooks', $book['Book']['user_id']));
+				//$this->redirect(array('action' => 'userbooks', $book['Book']['user_id']));
 			} else {
 				$this->Session->setFlash(
 						__('The %s could not be saved. Please, try again.', __('book')), 'alert', array(

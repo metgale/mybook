@@ -22,7 +22,7 @@ class WritingsController extends AppController {
 		);
 		$pdfFile = TMP . $writing_id . '.pdf';
 		$epubFile = TMP . $writing_id . '.epub';
-		
+
 		file_put_contents($pdfFile, $html);
 		exec("C:\www\calibre\ebook-convert.exe $pdfFile $epubFile");
 
@@ -31,16 +31,17 @@ class WritingsController extends AppController {
 		$this->response->type('application/epub');
 		$this->response->download($writing_id . '.epub');
 		$this->response->body(file_get_contents($epubFile));
-		
+
 		unlink($epubFile);
 	}
 
 	public function index() {
-		
+
 		$this->paginate = array(
 			'limit' => 6,
 			'order' => 'Writing.created DESC',
 			'contain' => array('User', 'Category', 'Book'),
+			'conditions' => array('Writing.published' => 1)
 		);
 		$this->set('writings', $this->paginate());
 		$categories = $this->Writing->Category->find('all');
@@ -81,7 +82,7 @@ class WritingsController extends AppController {
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'limit' => 6,
-			'order' => 'Writing.created DESC',
+			'order' => 'Writing.book_id DESC',
 			'contain' => array('User', 'Category', 'Book'),
 		);
 		$this->set('writings', $this->paginate());
@@ -94,7 +95,7 @@ class WritingsController extends AppController {
 	public function user($id) {
 
 		$this->paginate = array(
-			'conditions' => array('Writing.user_id' => $id),
+			'conditions' => array('Writing.user_id' => $id, 'Writing.published' => 1),
 			'order' => 'Writing.created DESC',
 			'contain' => array('User', 'Category', 'Book'),
 		);
@@ -113,15 +114,24 @@ class WritingsController extends AppController {
 	 * @return void
 	 */
 	public function view($id) {
+		$this->set('allowComments', 1);
 		if (!$this->Writing->exists($id)) {
 			throw new NotFoundException(__('Invalid writing'));
 		}
-
 		$options = array(
 			'conditions' => array('Writing.id' => $id),
-			'contain' => array('Category', 'User')
+			'contain' => array('Category', 'User', 'Book')
 		);
 		$writing = $this->Writing->find('first', $options);
+		
+		if($writing['Writing']['published'] == 0){
+				if($writing['Writing']['user_id'] != $this->Auth->user('id')){
+					throw new NotFoundException(__('Invalid writing'));
+				}
+				$this->set('allowComments', 0);
+		}
+		
+		
 		$this->set('writing', $writing);
 
 		$bookid = $writing['Writing']['book_id'];
@@ -165,7 +175,12 @@ class WritingsController extends AppController {
 		$this->request->data['Comment']['user_id'] = $this->Auth->user('id');
 		$this->request->data['Comment']['writing_id'] = $id;
 		if ($this->Writing->Comment->save($this->request->data)) {
-			$this->Session->setFlash('ok');
+			$this->Session->setFlash(
+					('Hvala na komentaru :)'), 'alert', array(
+				'plugin' => 'TwitterBootstrap',
+				'class' => 'alert-success'
+					)
+			);
 			$this->redirect(array('controller' => 'writings', 'action' => 'view', $id, '#' => 'comments'));
 		}
 	}
@@ -181,12 +196,17 @@ class WritingsController extends AppController {
 			$this->set('book', $this->Writing->Book->findById($this->request->query('book_id')));
 			$this->request->data['Writing']['book_id'] = $this->request->query('book_id');
 		}
-		
+
 		if ($this->request->is('post')) {
 			$this->Writing->create();
 			$this->request->data['Writing']['user_id'] = $this->Auth->user('id');
 			if ($this->Writing->save($this->request->data)) {
-				$this->Session->setFlash(__('The writing has been saved'));
+				$this->Session->setFlash(
+						('Writing has been saved'), 'alert', array(
+					'plugin' => 'TwitterBootstrap',
+					'class' => 'alert-success'
+						)
+				);
 				$this->redirect(array('action' => 'userwritings', $this->Auth->user('id')));
 			} else {
 				$this->Session->setFlash(__('The writing could not be saved. Please, try again.'));

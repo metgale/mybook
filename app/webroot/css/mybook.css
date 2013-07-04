@@ -1,5 +1,6 @@
 body{
-	padding-top: 80px;
+	padding-top:80px;
+	
 }
 .nav-left{
 	float:top;
@@ -7,6 +8,11 @@ body{
 .page-header {
 	margin-top: 0;
 }
+.container{
+	
+}
+
+
 .metadata {
 	color: #999;
 }
@@ -132,6 +138,9 @@ body{
 	float:right;
 	margin-right:50px;
 }
+.dropdown .control-grup .controls{
+	margin: 50px;
+}
 #profile{
 	border-bottom: 1px solid #EEE;
 }
@@ -140,23 +149,70 @@ body{
 	list-style-type: none;
 	padding-top:20px;
 }
+.profile-nav{
+	margin:5px;
+}
 
-.prijava{
+.navbar-inverse .nav > li > a{
+	font-weight: bold;
+}
+
+.prijava {
 	padding-top: 10px;
+}
+.navbar .nav .controls{
+	margin-left:20px;
+	margin-top:10px;
+	margin-right:10px;
+}
+.navbar .nav .control-label,
+.navbar .nav .labels{
+	margin-left:20px;
+	margin-top:10px;
+	margin-right:10px;
+}
+
+.nav-tabs{
+	border:none;
 }
 .prijava a{
 	color: #999999;
+	padding-left:50px;
+	font-weight: bolder;
 }
+
 .prijava a:hover{
 	color:white;
 	text-decoration: none;
 }
 
-.homepage .hero-unit{
-	text-align: center;
+.homepage .span6{
+	margin-bottom:50px;
+
 }
+.homepage .media{
+	padding:5px;
+	margin-bottom:15px;
+}
+.homepage .media,
+.media-body{
+	overflow:visible;
+
+}
+.homepage .media-heading a{
+	color:#333333;
+}
+
 .hero-unit{
-	background:white;
+	border-bottom: 1px solid #EEE;
+	text-align: center;
+	background:#EEE;
+	padding:10px;
+}
+.hero-unit .btn{
+	width:100px;
+	padding:3px;
+	margin:15px;
 }
 .hero-unit h1{
 	padding-bottom: 20px;	
@@ -217,4 +273,36 @@ div.mce-fullscreen{
 }
 .user-actions .btn{
 	margin-left:5px;
+}
+
+.footer{
+	margin-top:20px;
+	border-top: 1px solid #dddddd;
+	text-align: center;
+	padding-top:20px;
+}
+.footer a{
+	margin-left:50px;
+	color:#999999;
+	padding-bottom:25px;
+}
+
+.footer p{
+	margin-top:20px;
+	margin-left:40px;
+}
+
+#cta{
+	margin-right:30px;
+	font-weight: bold;
+	padding:10px;
+}
+.pdfdownload{
+	padding-top:30px;
+}
+
+.books .media{
+	margin: 20px 40px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #EEE;
 }
