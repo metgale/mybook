@@ -12,6 +12,13 @@ class UsersController extends AppController {
 	public function login() {
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
+				$username = $this->Auth->user('username');
+				$this->Session->setFlash(
+						('Prijava uspješna'), 'alert', array(
+					'plugin' => 'TwitterBootstrap',
+					'class' => 'alert-success'
+						)
+				);
 				return $this->redirect(array(
 					'controller' => 'users',
 					'action' => 'profile', $this->Auth->user('id')
@@ -38,7 +45,7 @@ class UsersController extends AppController {
 		$this->paginate = array(
 			'User' => array(
 				'order' => array('writing_count' => 'desc'),
-				'contain' => array('Writing')
+				'contain' => array('Writing', 'AttachmentImage')
 			)
 		);
 		$users = $this->paginate();
@@ -58,7 +65,7 @@ class UsersController extends AppController {
 		}
 		$options = array(
 			'conditions' => array('User.id' => $id),
-			'contain' => array('Writing', 'Comment'));
+			'contain' => array('Writing', 'Comment', 'AttachmentImage'));
 		$this->set('user', $this->User->find('first', $options));
 		$this->paginate = array(
 			'Writing' => array(
@@ -83,7 +90,7 @@ class UsersController extends AppController {
 		}
 		$options = array(
 			'conditions' => array('User.' . $this->User->primaryKey => $id),
-			'contain' => array('Writing', 'Comment', 'Book'));	
+			'contain' => array('Writing', 'Comment', 'Book', 'AttachmentImage'));	
 		$this->set('user', $this->User->find('first', $options));	
 	}
 	
@@ -98,7 +105,12 @@ class UsersController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved'));
+				$this->Session->setFlash(
+					('Izmjene pohranjene'), 'alert', array(
+				'plugin' => 'TwitterBootstrap',
+				'class' => 'alert-success'
+					)
+			);
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
@@ -119,7 +131,12 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved'));
+				$this->Session->setFlash(
+					('Hvala na registraciji i dobrodošli'), 'alert', array(
+				'plugin' => 'TwitterBootstrap',
+				'class' => 'alert-success'
+					)
+			);
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));

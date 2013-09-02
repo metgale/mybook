@@ -1,9 +1,9 @@
 <div id="profile" class="row-fluid">
 	<ul class="leftinfo span2">
-		<?php if ($user['User']['image']) { ?>
-			<img class ="user-profilethumb" src="<?php echo $user['User']['image'] ?>">
+		<?php if ($user['AttachmentImage']['filename']) { ?>
+			<img class ="user-profilethumb" src="/img/covers/<?php echo $user['AttachmentImage']['filename'] ?>">
 		<?php } ?>
-		<?php if (!$user['User']['image']) { ?>
+		<?php if (!$user['AttachmentImage']['filename']) { ?>
 			<img class ="user-profilethumb" src="/img/missing.jpg">
 		<?php } ?>
 		<ul class="profile-nav">

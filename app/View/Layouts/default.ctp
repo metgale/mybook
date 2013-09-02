@@ -103,11 +103,11 @@
 		<?php echo $this->fetch('script'); ?>
 	</wrap>
 	<div class="footer">
-			<a href="/books/index">Knjige</a>
-			<a href="/writings/index">Tekstovi</a>
-			<a href="/users/index">Autori</a>
-			<p>&copy; <?php echo date('Y'); ?> MyBooks </p>
-			<a class="onTop" href="#top">Na vrh	 &uarr;</a>
+		<a href="/books/index">Knjige</a>
+		<a href="/writings/index">Tekstovi</a>
+		<a href="/users/index">Autori</a>
+		<p>&copy; <?php echo date('Y'); ?> MyBooks </p>
+		<a class="onTop" href="#top">Na vrh	 &uarr;</a>
 	</div>
 </body>
 </html>

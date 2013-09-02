@@ -58,6 +58,7 @@ class BooksController extends AppController {
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'limit' => 6,
+			'order' => 'Book.created DESC',
 			'contain' => array('User', 'Category', 'AttachmentImage'),
 			'conditions' => array('Book.published' => 1)
 		);
@@ -207,7 +208,7 @@ class BooksController extends AppController {
 			$this->request->data['Book']['user_id'] = $this->Auth->user('id');
 			if ($this->Book->save($this->request->data)) {
 				$this->Session->setFlash(
-						__('The %s has been saved', __('writing')), 'alert', array(
+						('Knjiga uspješno dodana'), 'alert', array(
 					'plugin' => 'TwitterBootstrap',
 					'class' => 'alert-success'
 						)
@@ -239,7 +240,6 @@ class BooksController extends AppController {
 		$book = $this->Book->findById($id);
 		
 		$image = $this->Book->AttachmentImage->find('all');
-		debug($image);
 		$this->set('book', $book);
 		if (!$book) {
 			throw new NotFoundException(__('Invalid %s', __('book')));
@@ -250,12 +250,12 @@ class BooksController extends AppController {
 			if ($this->Book->save($this->request->data)) {
 				
 				$this->Session->setFlash(
-						__('The %s has been saved', __('book')), 'alert', array(
+						('Izmjene uspješno spremljene'), 'alert', array(
 					'plugin' => 'TwitterBootstrap',
 					'class' => 'alert-success'
 						)
 				);
-				//$this->redirect(array('action' => 'userbooks', $book['Book']['user_id']));
+				$this->redirect(array('action' => 'userbooks', $book['Book']['user_id']));
 			} else {
 				$this->Session->setFlash(
 						__('The %s could not be saved. Please, try again.', __('book')), 'alert', array(
@@ -288,12 +288,12 @@ class BooksController extends AppController {
 			throw new NotFoundException(__('Invalid %s', __('book')));
 		}
 		if ($this->Book->delete()) {
-			$this->Session->setFlash(
-					__('The %s deleted', __('book')), 'alert', array(
-				'plugin' => 'TwitterBootstrap',
-				'class' => 'alert-success'
-					)
-			);
+				$this->Session->setFlash(
+						('Knjiga izbrisana'), 'alert', array(
+					'plugin' => 'TwitterBootstrap',
+					'class' => 'alert-success'
+						)
+				);
 			$this->redirect(array('action' => 'userbooks', $this->Auth->user('id')));
 		}
 		$this->Session->setFlash(

@@ -123,15 +123,15 @@ class WritingsController extends AppController {
 			'contain' => array('Category', 'User', 'Book')
 		);
 		$writing = $this->Writing->find('first', $options);
-		
-		if($writing['Writing']['published'] == 0){
-				if($writing['Writing']['user_id'] != $this->Auth->user('id')){
-					throw new NotFoundException(__('Invalid writing'));
-				}
-				$this->set('allowComments', 0);
+
+		if ($writing['Writing']['published'] == 0) {
+			if ($writing['Writing']['user_id'] != $this->Auth->user('id')) {
+				throw new NotFoundException(__('Invalid writing'));
+			}
+			$this->set('allowComments', 0);
 		}
-		
-		
+
+
 		$this->set('writing', $writing);
 
 		$bookid = $writing['Writing']['book_id'];
@@ -202,7 +202,7 @@ class WritingsController extends AppController {
 			$this->request->data['Writing']['user_id'] = $this->Auth->user('id');
 			if ($this->Writing->save($this->request->data)) {
 				$this->Session->setFlash(
-						('Writing has been saved'), 'alert', array(
+						('Tekst uspješno dodan'), 'alert', array(
 					'plugin' => 'TwitterBootstrap',
 					'class' => 'alert-success'
 						)
@@ -258,7 +258,12 @@ class WritingsController extends AppController {
 		$this->request->data['Writing']['user_id'] = $this->Auth->user('id');
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Writing->save($this->request->data)) {
-				$this->Session->setFlash(__('The writing has been saved'));
+				$this->Session->setFlash(
+						('Izmjene uspješno spremljene'), 'alert', array(
+					'plugin' => 'TwitterBootstrap',
+					'class' => 'alert-success'
+						)
+				);
 				$this->redirect(array('action' => 'userwritings', $this->Auth->user('id')));
 			} else {
 				$this->Session->setFlash(__('The writing could not be saved. Please, try again.'));
@@ -286,7 +291,12 @@ class WritingsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Writing->delete()) {
-			$this->Session->setFlash(__('Writing deleted'));
+			$this->Session->setFlash(
+						('Tekst izbrisan'), 'alert', array(
+					'plugin' => 'TwitterBootstrap',
+					'class' => 'alert-success'
+						)
+				);
 			$this->redirect(array('action' => 'userwritings', $this->Auth->user('id')));
 		}
 		$this->Session->setFlash(__('Writing was not deleted'));

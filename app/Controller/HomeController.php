@@ -17,7 +17,7 @@ class HomeController extends AppController {
 		$options_ = array(
 			'order' => 'Book.created DESC',
 			'limit' => 6,
-			'contain' => array('User'),
+			'contain' => array('User', 'AttachmentImage'),
 			'conditions' => array('Book.published' => 1)			
 		);
 		$latestbooks = $this->Book->find('all', $options_);

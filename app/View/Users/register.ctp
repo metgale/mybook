@@ -1,6 +1,6 @@
 <div class="row-fluid">
 	<div class="span9">
-		<?php echo $this->Form->create('User', array('class' => 'form-horizontal')); ?>
+		<?php echo $this->Form->create('User', array('class' => 'form-horizontal', 'type' => 'file')); ?>
 		<fieldset>
 			<legend><?php echo __('Registriraj se na myBook!'); ?></legend>
 			<?php
@@ -16,6 +16,7 @@
 				'required' => 'required',
 				'label' => 'E-mail'
 			));
+			echo $this->Form->input('image', array('type' => 'file', 'label' => 'Slika'));
 		
 			?>
 			<?php

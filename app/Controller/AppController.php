@@ -44,7 +44,6 @@ class AppController extends Controller {
 	public $components = array(
 		'RequestHandler',
 		'Session',
-		'DebugKit.Toolbar',
 		'Auth' => array(
 			'loginAction' => array('controller' => 'users', 'action' => 'login'),
 			'authError' => 'Did you really think you are allowed to see that?',

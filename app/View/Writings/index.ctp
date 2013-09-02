@@ -5,26 +5,42 @@
 			'controller' => 'writings',
 			'action' => 'index'
 		));
-		?></h3>
+		?>
+	</h3>
+
+
 	<ul class="writings-categories pull-right">
-			<?php foreach ($categories as $category): ?>  
+		<?php foreach ($categories as $category): ?>  
 			<li><?php
-			echo $this->Html->link(h($category['Category']['name']), array(
-				'controller' => 'writings',
-				'action' => 'category', $category['Category']['id']));
-			?>	</li>
-<?php endforeach; ?>
+				echo $this->Html->link(h($category['Category']['name']), array(
+					'controller' => 'writings',
+					'action' => 'category', $category['Category']['id']));
+				?>	</li>
+		<?php endforeach; ?>
 
 	</ul>
 </div>
 
+<span class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		Poredaj po
+		<b class="caret"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li><?php echo $this->Paginator->sort('user_id', 'Autoru'); ?></li>
+		<li><?php echo $this->Paginator->sort('book_id', 'Knjizi'); ?></li>
+		<li><?php echo $this->Paginator->sort('category_id', 'Kategoriji'); ?></li>
+		<li><?php echo $this->Paginator->sort('created', 'Datumu'); ?></li>
+	</ul>
+</span>
+
 <div class="row">
     <div class="span12">
-				<?php foreach ($writings as $writing): ?>    
+		<?php foreach ($writings as $writing): ?>    
 			<div class="writing-item">
 				<h2 class="writing-title"><?php
-				echo $this->Html->link(h($writing['Writing']['title']), array('action' => 'view', $writing['Writing']['id']), array('class' => 'read-more'));
-				?> &rarr;</h2>
+					echo $this->Html->link(h($writing['Writing']['title']), array('action' => 'view', $writing['Writing']['id']), array('class' => 'read-more'));
+					?> &rarr;</h2>
 				<div class="writing-description">
 					<p><?php echo h($writing['Writing']['description']); ?></p>
 				</div>
@@ -34,12 +50,12 @@
 					<span class="writing-category">u kategoriji <?php echo $this->Html->link($writing['Category']['name'], array('controller' => 'writings', 'action' => 'category', $writing['Category']['id']));
 					?>&nbsp;</span>	
 					<span class="writing-book">
-						<?php if($writing['Book']['id'] == null): ?>
-						Samostalni tekst
+						<?php if ($writing['Book']['id'] == null): ?>
+							Samostalni tekst
 						<?php else: ?>
-						Tekst u knjizi:					
+							Tekst u knjizi:					
 						<?php endif; ?>
-						<?php echo $this->Html->link($writing['Book']['title'], array('controller' => 'books','action' => 'view',	$writing['Book']['id']))
+						<?php echo $this->Html->link($writing['Book']['title'], array('controller' => 'books', 'action' => 'view', $writing['Book']['id']))
 						?>&nbsp;
 					</span>
 				</div>

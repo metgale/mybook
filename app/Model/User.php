@@ -17,6 +17,37 @@ class User extends AppModel {
      * @var array
      */
     public $validate = array(
+		'image' => array(
+			'extension' => array(
+				'rule' => array(
+					'extension', array(
+						'jpg',
+						'jpeg',
+						'bmp',
+						'gif',
+						'png',
+						'jpg'
+					)
+				),
+				'message' => 'File extension is not supported',
+				'on' => 'create'
+			),
+			'mime' => array(
+				'rule' => array('mime', array(
+						'image/jpeg',
+						'image/pjpeg',
+						'image/bmp',
+						'image/x-ms-bmp',
+						'image/gif',
+						'image/png'
+					)),
+				'on' => 'create'
+			),
+			'size' => array(
+				'rule' => array('size', 2097152),
+				'on' => 'create'
+			)
+		),
         'admin' => array(
             'boolean' => array(
                 'rule' => array('boolean'),
@@ -58,6 +89,26 @@ class User extends AppModel {
             ),
         ),
     );
+	
+	public $actsAs = array(
+		'Attach.Upload' => array(
+			'image' => array(
+				'dir' => 'webroot{DS}img{DS}covers',
+				'thumbs' => array(
+					'thumb' => array(
+						'w' => 85,
+						'h' => 100,
+						'crop' => true,
+					),
+				),
+				'large' => array(
+					'w' => 200,
+					'h' => 160,
+					'crop' => true,
+				),
+			),
+		)
+	);
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 

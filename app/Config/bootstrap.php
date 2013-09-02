@@ -70,7 +70,6 @@ Cache::config('default', array('engine' => 'File'));
  *
  */
 CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
-CakePlugin::load('DebugKit');
 CakePlugin::load('TwitterBootstrap');
 CakePlugin::load('Attach');
 
@@ -131,7 +130,7 @@ CakeLog::config('error', array(
 	 
         //'orientation' => 'landscape',
         'download' => true,
-	    'binary' => 'C:\www\wkhtmltopdf\wkhtmltopdf.exe'
-	   // 'binary' => '/usr/bin/wkhtmltopdf'
+	   //'binary' => 'C:\www\wkhtmltopdf\wkhtmltopdf.exe'
+	   'binary' => '/usr/bin/wkhtmltopdf'
     ));
 

@@ -15,18 +15,16 @@
 	
 
 	<!-- Example row of columns -->
-	<div class="row-fluid">
-
+	<div class="home row-fluid">
 		<div class="span6">
 			<small>Posljednje knjige</small>
 			<?php foreach ($latestbooks as $latestbook): ?>
 				<div class="media">
-					<?php if (isset($latestbook['Book']['cover'])) { ?>
-						<a class="pull-left" href="#">
-							<img class="media-object" src="<?php echo $latestbook['Book']['cover'] ?>">
-						</a>
-					<?php } ?>
-					
+					<?php if ($latestbook['AttachmentImage']['filename']) { ?>
+					<a class="pull-left" href="#">
+						<img class ="media-object" src="/img/covers/<?php echo $latestbook['AttachmentImage']['filename'] ?>">
+					</a>
+				<?php } ?>
 					<div class="media-body">
 						<div class="media-heading">
 							<h2><?php echo $this->Html->link($latestbook['Book']['title'], array('controller' => 'books', 'action' => 'view', $latestbook['Book']['id'])); ?> <small>by <?php echo $this->Html->link($latestbook['User']['username'], array('controller' => 'users', 'action' => 'view', $latestbook['User']['id']));  ?></small></h2>

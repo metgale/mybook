@@ -16,19 +16,25 @@
 		<?php endforeach; ?>
 	</ul>
 </div>
+
+<span class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		Poredaj po
+		<b class="caret"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li><?php echo $this->Paginator->sort('created', 'Datumu'); ?></li>
+		<li><?php echo $this->Paginator->sort('category_id', 'Kategoriji'); ?></li>
+		<li><?php echo $this->Paginator->sort('user_id', 'Autoru'); ?></li>
+	</ul>
+</span>
 <div class="books row">
     <div class="span12 clearfix">  
 		<?php foreach ($books as $book): ?>
 			<div class="media">
 				<?php if ($book['AttachmentImage']['filename']) { ?>
 					<a class="pull-left" href="#">
-						<img class ="media-object" src="/img/covers/thumb.<?php echo $book['AttachmentImage']['filename'] ?>">
-					</a>
-				<?php } ?>
-
-				<?php if (!$book['Book']['cover']) { ?>
-					<a class="pull-left" href="#">
-						<img class ="media-object" src="/img/missing_cover.jpg">
+						<img class ="media-object" src="/img/covers/<?php echo $book['AttachmentImage']['filename'] ?>">
 					</a>
 				<?php } ?>
 				<div class="media-body">

@@ -1,5 +1,7 @@
 <div class="row-fluid">
 	<div class="span9">
+		<?php echo $this->Form->postLink(__('Izbriši'), array('action' => 'delete', $book['Book']['id']), array('class' => 'btn btn-danger'), null, __('Are you sure you want to delete # %s?', $book['Book']['id'])); ?>
+
 		<?php echo $this->Form->create('Book', array('class' => 'form-horizontal', 'type' => 'file')); ?>
 		<fieldset>
 			<legend><?php echo __('Uredi knjigu'); ?></legend>

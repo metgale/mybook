@@ -7,14 +7,25 @@
 		));
 		?></h3>
 </div>
+
+<span class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		Poredaj po
+		<b class="caret"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li><?php echo $this->Paginator->sort('writing_count', 'Broju Izdanih Tekstova'); ?></li>
+		<li><?php echo $this->Paginator->sort('created', 'Datumu Registracije'); ?></li>
+	</ul>
+</span>
 <div class="row">
 	<div class="span12">
 		<?php foreach ($users as $user): ?>
 			<div class="user-item">
-				<?php if ($user['User']['image']) { ?>
-					<img class ="user-profilethumb" src="<?php echo $user['User']['image'] ?>">
+				<?php if ($user['AttachmentImage']['filename']) { ?>
+					<img class ="user-profilethumb" src="/img/covers/<?php echo $user['AttachmentImage']['filename'] ?>">
 				<?php } ?>
-				<?php if (!$user['User']['image']) { ?>
+				<?php if (!$user['AttachmentImage']['filename']) { ?>
 					<img class ="user-profilethumb" src="/img/missing.jpg">
 				<?php } ?>
 

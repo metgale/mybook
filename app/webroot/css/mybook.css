@@ -96,7 +96,6 @@ body{
 	float:left;
 	padding-right:20px;
 	border-radius:15px;
-	height: 100px;
 }
 
 .user-view .user-data{
@@ -305,4 +304,17 @@ div.mce-fullscreen{
 	margin: 20px 40px;
 	padding-bottom: 15px;
 	border-bottom: 1px solid #EEE;
+}
+.books .media .media-object{
+	width: 85px;
+	height: 100px;
+}
+.home .media .media-object{
+	width: 85px;
+	height: 100px;
+}
+
+.user-profilethumb{
+	height: 100px;
+	width:85px;
 }
