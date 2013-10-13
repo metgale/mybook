@@ -1,4 +1,4 @@
 MyBook project
 =======
 
-Web app (CakePHP) - publishing text and generating E-Books (pdf, epub)
+Web app (CakePHP) - publish texts and generate E-Books (pdf, epub)
